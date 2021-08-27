@@ -15,20 +15,20 @@ public class CSlotGrid : MonoBehaviour
 
     int index = 0;
 
-    PlayerControl pc;
+    PlayerControl playerControl;
 
     void Start()
     {
-        pc = GameObject.FindWithTag("Player").GetComponent<PlayerControl>();
+        playerControl = GameObject.FindWithTag("Player").GetComponent<PlayerControl>();
     }
 
     private void Update()
     {
-        if (pc.Catch() == 1)
+        if (playerControl.Catch())
         {
-            if (pc.ItemName() != "kara")//取得したアイテム名をデータから検索
+            if (playerControl.ItemName() != null)//取得したアイテム名をデータから検索
             {
-                Item(pc.ItemName());
+                Item(playerControl.ItemName());
                 index++;
             }
         }

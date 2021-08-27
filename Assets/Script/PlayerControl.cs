@@ -21,7 +21,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         GameObject ItemArea;//アイテム保管用スペース
         float distItem = -3;//アイテム保管後の間隔
 
-        string itemName = "kara";
+        string itemName;
 
         private void Start()
         {
@@ -106,12 +106,20 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 {
                     if (m_catch)
                     {
-                        //csg.Item(collision.gameObject.name);
                         itemName = collision.gameObject.name;
                         collision.gameObject.transform.position = new Vector3(ItemArea.transform.position.x + distItem, ItemArea.transform.position.y + 5, ItemArea.transform.position.z);
-                        //Debug.Log(itemName);
                         distItem += 3;
                         haveCount++;
+                    }
+                }
+            }
+            else if(collision.gameObject.tag == "Gomibako")
+            {
+                if (haveCount > 0 && haveCount < 3)
+                {
+                    if (m_release)
+                    {
+                        ///離した時の処理///
                     }
                 }
             }
@@ -122,10 +130,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             return itemName;
         }
 
-        public int Catch()
+        public bool Catch()
         {
-            if (m_catch) return 1;
-            else return 0;
+            return m_catch;
         }
 
     }

@@ -18,7 +18,7 @@ public abstract class ItemBase : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            if (playerControl.Catch() == 1)
+            if (playerControl.Catch())
             {
                 Active();
                 Destroy(this.gameObject);
