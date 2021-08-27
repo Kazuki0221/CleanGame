@@ -16,13 +16,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         bool m_catch;//拾う
         bool m_release;//放す
 
-        //GameManager gm;
         int haveCount = 0;//アイテム所持数
-        GameObject ItemArea;//アイテム保管用スペース
-        float distItem = -3;//アイテム保管後の間隔
 
-        string itemName;
+        public string itemName;//アイテム名
 
+        CSlotGrid cSlotGrid;
+        ItemSelect itemSelect;
         private void Start()
         {
             // get the transform of the main camera
@@ -39,9 +38,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             // get the third person character ( this should never be null due to require component )
             m_Character = GetComponent<PlayerCharacter>();
-            //gm = GetComponent<GameManager>();
-            //csg = GetComponent<CSlotGrid>();
-            ItemArea = GameObject.Find("ItemArea");
+            cSlotGrid = GameObject.Find("SlotGrid").GetComponent<CSlotGrid>();
+            itemSelect = GameObject.Find("SelectArea").GetComponent<ItemSelect>();
         }
 
 
@@ -62,7 +60,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             float v = CrossPlatformInputManager.GetAxis("Vertical");
             bool crouch = Input.GetKey(KeyCode.C);
             m_catch = Input.GetButton("Fire1");
-            m_release = Input.GetButtonDown("Fire2");
+            m_release = Input.GetButton("Fire2");
 
             // calculate move direction to pass to character
             if (m_Cam != null)
@@ -83,16 +81,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 #endif
 
-            //if (csg.allItem[2] == null)
-            //{
-            //    m_catch = Input.GetButton("Fire1");
-                
-            //}
-            //else if(csg.allItem[select.SelectNum()] != null)
-            //{
-            //    m_release = Input.GetButton("Fire1");
-            //}
-
             // pass all parameters to the character control script
             m_Character.Move(m_Move, crouch, m_Jump, m_catch, m_release);
             m_Jump = false;
@@ -107,8 +95,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     if (m_catch)
                     {
                         itemName = collision.gameObject.name;
-                        collision.gameObject.transform.position = new Vector3(ItemArea.transform.position.x + distItem, ItemArea.transform.position.y + 5, ItemArea.transform.position.z);
-                        distItem += 3;
+                        Destroy(collision.gameObject);
                         haveCount++;
                     }
                 }
@@ -119,15 +106,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 {
                     if (m_release)
                     {
-                        ///離した時の処理///
+                        Instantiate(cSlotGrid.ReleseItem(itemSelect.num), collision.gameObject.transform.position, cSlotGrid.ReleseItem(itemSelect.num).ItemObj.transform.rotation);
+                        haveCount--;
                     }
                 }
             }
-        }
-
-        public string ItemName()
-        {
-            return itemName;
         }
 
         public bool Catch()

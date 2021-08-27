@@ -8,7 +8,7 @@ public class ItemSelect : MonoBehaviour
 
     [SerializeField] GameObject[] slot;
     [Range(0, 2)]
-    int num = 0;
+    public int num = 0;
     [SerializeField]Image[] images;
     int temp;
     // Start is called before the first frame update

@@ -26,9 +26,9 @@ public class CSlotGrid : MonoBehaviour
     {
         if (playerControl.Catch())
         {
-            if (playerControl.ItemName() != null)//取得したアイテム名をデータから検索
+            if (playerControl.itemName != null)//取得したアイテム名をデータから検索
             {
-                Item(playerControl.ItemName());
+                Item(playerControl.itemName);
                 index++;
             }
         }
@@ -59,12 +59,15 @@ public class CSlotGrid : MonoBehaviour
                 if(index < slotNumber) 
                 { 
                     allItem[index] = itemList[i];
-                    //Debug.Log("aa");
-                    //index++;
                     break;
                 }
             }
         }
+    }
+    public CItem ReleseItem(int num)
+    {
+        index = num;
+        return allItem[index];
     }
 
 

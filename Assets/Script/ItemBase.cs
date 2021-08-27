@@ -16,7 +16,7 @@ public abstract class ItemBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)//仮置き、拾ったらスコア追加
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Gomibako")
         {
             if (playerControl.Catch())
             {
