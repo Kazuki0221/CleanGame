@@ -1,18 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public abstract class ItemBase : MonoBehaviour
 {
-   
+    PlayerControl playerControl;
+
     public abstract void Active();
 
-    private void OnCollisionEnter(Collision collision)
+    private void Start()
     {
-        if(collision.gameObject.tag == "Gomibako")
+        playerControl = GameObject.FindWithTag("Player").GetComponent<PlayerControl>();   
+    }
+
+    private void OnCollisionEnter(Collision collision)//仮置き、拾ったらスコア追加
+    {
+        if(collision.gameObject.tag == "Player")
         {
-            Active();
-            Destroy(this.gameObject);
+            if (playerControl.Catch() == 1)
+            {
+                Active();
+                Destroy(this.gameObject);
+            }
         }
     }
 }
