@@ -8,5 +8,6 @@ public class PetBottle : ItemBase
     public override void Active()
     {
         FindObjectOfType<GameManager>().AddScore(m_score);
+        Destroy(this.gameObject);
     }
 }

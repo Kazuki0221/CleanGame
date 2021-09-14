@@ -18,7 +18,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         int haveCount = 0;//アイテム所持数
 
-        public string itemName;//アイテム名
+        public string itemName = null;//アイテム名
 
         CSlotGrid cSlotGrid;
         ItemSelect itemSelect;
@@ -96,11 +96,20 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     {
                         itemName = collision.gameObject.name;
                         Destroy(collision.gameObject);
-                        haveCount++;
+                        if(itemName != null)haveCount++;
                     }
                 }
             }
-            else if(collision.gameObject.tag == "Gomibako")
+            else
+            {
+                itemName = null;
+            }
+            
+        }
+
+        private void OnTriggerStay(Collider collision)
+        {
+            if (collision.gameObject.tag == "Gomibako")
             {
                 if (haveCount > 0 && haveCount < 3)
                 {
@@ -116,6 +125,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public bool Catch()
         {
             return m_catch;
+        }
+        public bool Release()
+        {
+            return m_release;
         }
 
     }

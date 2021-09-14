@@ -30,6 +30,7 @@ public class CSlotGrid : MonoBehaviour
             {
                 Item(playerControl.itemName);
                 index++;
+                playerControl.itemName = null;
             }
         }
         //Debug.Log(pc.Catch());
