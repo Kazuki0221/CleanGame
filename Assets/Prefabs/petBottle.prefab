@@ -92,8 +92,9 @@ GameObject:
   - component: {fileID: 8432933301396742193}
   - component: {fileID: -5485158387485257073}
   - component: {fileID: 2764704010550018208}
+  - component: {fileID: -4877578967634848380}
   m_Layer: 0
-  m_Name: "\u30DA\u30C3\u30C8\u30DC\u30C8\u30EB"
+  m_Name: petBottle
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,3 +192,16 @@ CapsuleCollider:
   m_Height: 43.77144
   m_Direction: 1
   m_Center: {x: -1.5208817, y: -4.197235, z: -1.7618525}
+--- !u!114 &-4877578967634848380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7928358824648311268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9377e85e940931f49be9d3c92b0eeb3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_score: 10

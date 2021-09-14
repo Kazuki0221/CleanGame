@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8492315826179018095}
   - component: {fileID: 5593082767189072293}
   - component: {fileID: 1328852796153647303}
+  - component: {fileID: 1978754255}
   m_Layer: 5
   m_Name: SlotGrid
   m_TagString: Untagged
@@ -114,3 +115,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 1
   m_VerticalFit: 1
+--- !u!114 &1978754255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279745732354775307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb30865b62763a440a2abd04fe314a20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotPrefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  allItem:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  itemList:
+  - {fileID: 11400000, guid: 859e24d27acb0e742a8562e7dd4c7bdb, type: 2}
+  - {fileID: 11400000, guid: 50c84c15656f3c941842f6927fdfecf5, type: 2}
+  - {fileID: 11400000, guid: f6ffc42233abc314faf3248109a930fc, type: 2}
+  kindItemCount: 3

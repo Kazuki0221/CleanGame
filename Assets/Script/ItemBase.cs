@@ -14,15 +14,12 @@ public abstract class ItemBase : MonoBehaviour
         playerControl = GameObject.FindWithTag("Player").GetComponent<PlayerControl>();   
     }
 
-    private void OnCollisionEnter(Collision collision)//仮置き、拾ったらスコア追加
+    private void OnTriggerEnter(Collider other)
     {
-       
-        if(collision.gameObject.tag == "Gomibako")
+        if (other.gameObject.tag == "Gomibako")
         {
-            if (playerControl.Release())
-            {
-                Active();
-            }
+            Active();
+            Destroy(this.gameObject);
         }
     }
 }

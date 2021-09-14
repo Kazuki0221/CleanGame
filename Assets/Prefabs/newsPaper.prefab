@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 2804463806421158761}
   - component: {fileID: -3707810625953042780}
   - component: {fileID: 1267049670987064604}
+  - component: {fileID: 6302995915226229529}
   m_Layer: 0
-  m_Name: "\u65B0\u805E\u7D19"
+  m_Name: newsPaper
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,6 +112,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 198.90703, y: 103.81236, z: 15.010352}
   m_Center: {x: -69.202, y: 28.219532, z: 4.2903533}
+--- !u!114 &6302995915226229529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4461809978126363324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a442109cf11d44397fd03e3845c8a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_score: 10
 --- !u!1 &7565348754679653046
 GameObject:
   m_ObjectHideFlags: 0

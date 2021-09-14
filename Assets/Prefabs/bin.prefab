@@ -92,8 +92,9 @@ GameObject:
   - component: {fileID: 7056977406420826972}
   - component: {fileID: -3978780821569491608}
   - component: {fileID: 1237992540116160135}
+  - component: {fileID: -955827377081732356}
   m_Layer: 0
-  m_Name: "\u30D3\u30F3 "
+  m_Name: bin
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,3 +196,16 @@ CapsuleCollider:
   m_Height: 53.621063
   m_Direction: 1
   m_Center: {x: -1.1521173, y: -2.1370697, z: -0.74946404}
+--- !u!114 &-955827377081732356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858466117811968649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a8499d87054a0b4b9fb8e1b483fd4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_score: 10

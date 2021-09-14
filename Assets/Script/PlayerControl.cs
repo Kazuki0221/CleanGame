@@ -100,22 +100,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     }
                 }
             }
-            else
-            {
-                itemName = null;
-            }
-            
         }
 
         private void OnTriggerStay(Collider collision)
         {
             if (collision.gameObject.tag == "Gomibako")
             {
+                Vector3 gPos = collision.gameObject.transform.position;
+                gPos.y += 5;
                 if (haveCount > 0 && haveCount < 3)
                 {
-                    if (m_release)
+                    if (m_release && cSlotGrid.ReleseItem(itemSelect.num) != null)
                     {
-                        Instantiate(cSlotGrid.ReleseItem(itemSelect.num), collision.gameObject.transform.position, cSlotGrid.ReleseItem(itemSelect.num).ItemObj.transform.rotation);
+                        Instantiate(cSlotGrid.ReleseItem(itemSelect.num).ItemObj, gPos, cSlotGrid.ReleseItem(itemSelect.num).ItemObj.transform.rotation);
                         haveCount--;
                     }
                 }

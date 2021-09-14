@@ -7,7 +7,6 @@ public class PetBottle : ItemBase
     [SerializeField] int m_score = 10;
     public override void Active()
     {
-        FindObjectOfType<GameManager>().AddScore(m_score);
-        Destroy(this.gameObject);
+        FindObjectOfType<GameController>().AddScore(m_score);
     }
 }
