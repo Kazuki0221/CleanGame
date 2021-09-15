@@ -159,6 +159,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f6ffc42233abc314faf3248109a930fc, type: 2}
   itemCount: 0
   scoreText: {fileID: 1792024324}
+  countTime: 40
+  baseColor: {r: 0, g: 0, b: 0, a: 1}
+  dgColor: {r: 1, g: 0, b: 0, a: 1}
+  time_text: {fileID: 975276987}
 --- !u!4 &277277981
 Transform:
   m_ObjectHideFlags: 0
@@ -442,6 +446,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &975276987 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2095743643, guid: 7d92396b373148e48b2b8e921ffecfda,
+    type: 3}
+  m_PrefabInstance: {fileID: 5351872119191842257}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1040120981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,5 +1142,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2095743645, guid: 7d92396b373148e48b2b8e921ffecfda, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7d92396b373148e48b2b8e921ffecfda, type: 3}
