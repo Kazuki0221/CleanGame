@@ -44,8 +44,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
 		}
 
-		//行動の管理
-		public void Move(Vector3 move, bool crouch, bool jump, bool pickUp, bool release)
+        
+
+        //行動の管理
+        public void Move(Vector3 move, bool crouch, bool jump, bool pickUp, bool release)
 		{
 
 			// convert the world relative moveInput vector into a local-relative

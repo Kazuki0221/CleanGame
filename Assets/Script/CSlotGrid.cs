@@ -20,11 +20,15 @@ public class CSlotGrid : MonoBehaviour
 
     void Start()
     {
-        playerControl = GameObject.FindWithTag("Player").GetComponent<PlayerControl>();
     }
 
     private void Update()
     {
+        if (playerControl == null) {
+            playerControl = GameObject.FindWithTag("Player").GetComponent<PlayerControl>();
+            return;
+        }
+
         if (index > 2) index = 0;
         if (playerControl.Catch())
         {
@@ -70,7 +74,7 @@ public class CSlotGrid : MonoBehaviour
             }
         }
     }
-    public CItem ReleseItem(int num)
+    public CItem ReleseItem(int num)//離すアイテム
     {
         index = num;
         return allItem[index];

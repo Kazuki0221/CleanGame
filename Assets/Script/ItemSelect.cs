@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class ItemSelect : MonoBehaviour
 {
 
-    [SerializeField] GameObject[] slot;
+    [SerializeField] GameObject[] slot;//全スロット
     [Range(0, 2)]
     public int num = 0;
-    [SerializeField]Image[] images;
+    [SerializeField]Image[] images;//スロット内画像
     int temp;
     // Start is called before the first frame update
     

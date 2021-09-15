@@ -5,18 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   
 
-    // Update is called once per frame
     void Update()
     {
-        if(SceneManager.GetActiveScene().name == "Title" && Input.GetKey(KeyCode.Return))
+        if (Input.GetKey(KeyCode.Return))
         {
-            SceneManager.LoadScene("SampleScene");
+            if (SceneManager.GetActiveScene().name == "Title")
+            {
+                SceneManager.LoadScene("CharacterSelect");
+            }
+            else if(SceneManager.GetActiveScene().name == "CharacterSelect")
+            {
+                SceneManager.LoadScene("SampleScene");
+            }
         }
     }
 

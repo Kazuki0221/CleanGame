@@ -13,32 +13,41 @@ public class GameController : MonoBehaviour
     /// </summary>
     Vector3 firstPlayerPos;
     Vector3 itemSpownPos;
-    //[SerializeField]GameObject playerPrefs;
+    [SerializeField]GameObject playerPrefs;
     [SerializeField]GameObject itemSpownArea;
     public CItem [] item;
     public int itemCount = 0;
 
-    //PlayerControl pc;
-
-    int m_score = 0;
-
+    /// <summary>
+    /// UI
+    /// </summary>
+    int  m_score = 0;//スコア
     [SerializeField] Text scoreText;
 
-    
+    //タイム
+    [SerializeField] float countTime = 0;
+    [SerializeField] Color baseColor = new Color(0, 0, 0, 1);
+    [SerializeField] Color dgColor = new Color(1, 0, 0, 1);
+    [SerializeField]Text time_text;
+
+
     // Start is called before the first frame update
     void Start()
     {
         firstPlayerPos = new Vector3(0, -0.01000017f, 0);
-        //Instantiate(PlayerPrefs, FirstPlayerPos, PlayerPrefs.transform.rotation);
-        //pc = GetComponent<PlayerControl>();
+        playerPrefs = CharaSelectManager.chara.character;
+        var charaObj = Instantiate(playerPrefs, firstPlayerPos, playerPrefs.transform.rotation);
+        charaObj.name = playerPrefs.name;
         AddScore(0);
+
     }
 
     // Update is called once per frame
     void Update()
     {
         InvokeRepeating("Createitem", 2, 1);
-        //itemCount = pc.itemCount();
+        Timer();
+
     }
 
     void Createitem()
@@ -62,6 +71,29 @@ public class GameController : MonoBehaviour
     {
         m_score += score;
         scoreText.text ="Score：" + m_score.ToString();
+    }
+
+    public int GetScore()
+    {
+        return m_score;
+    }
+
+    void Timer()
+    {
+        countTime -= Time.deltaTime;
+        time_text.text = countTime.ToString("F0");
+        if (countTime <= 10)
+        {
+            time_text.color = dgColor;
+        }
+        else
+        {
+            time_text.color = baseColor;
+        }
+        if (countTime < 0)
+        {
+            Time.timeScale = 0;
+        }
     }
 
 }
