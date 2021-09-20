@@ -551,6 +551,7 @@ GameObject:
   - component: {fileID: 694809823}
   - component: {fileID: 694809822}
   - component: {fileID: 694809821}
+  - component: {fileID: 694809824}
   m_Layer: 5
   m_Name: SelectArea
   m_TagString: Untagged
@@ -640,6 +641,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694809819}
   m_CullTransparentMesh: 0
+--- !u!114 &694809824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694809819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc88e6d972fed584a97ff5adf99ecf8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  result_text: {fileID: 241375925}
+  images:
+  - {fileID: 1082817493}
+  - {fileID: 812228313}
+  - {fileID: 1018318287}
 --- !u!1 &812228313
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,7 +672,7 @@ GameObject:
   - component: {fileID: 812228318}
   - component: {fileID: 812228317}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: ToCharaSelect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -858,7 +876,7 @@ GameObject:
   - component: {fileID: 1018318292}
   - component: {fileID: 1018318291}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: ToStageSelect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -982,7 +1000,7 @@ GameObject:
   - component: {fileID: 1082817498}
   - component: {fileID: 1082817497}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ToTitel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

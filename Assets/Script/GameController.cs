@@ -21,11 +21,11 @@ public class GameController : MonoBehaviour
     /// <summary>
     /// UI
     /// </summary>
-    int  m_score = 0;//スコア
+    public static int  m_score = 0;//スコア
     [SerializeField] Text scoreText;
 
     //タイム
-    [SerializeField] float countTime = 0;
+    float countTime = 10;
     [SerializeField] Color baseColor = new Color(0, 0, 0, 1);
     [SerializeField] Color dgColor = new Color(1, 0, 0, 1);
     [SerializeField]Text time_text;
@@ -94,6 +94,11 @@ public class GameController : MonoBehaviour
         {
             Time.timeScale = 0;
         }
+    }
+
+    public float PushTime()
+    {
+        return countTime;
     }
 
 }

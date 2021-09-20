@@ -71,7 +71,9 @@
     <Compile Include="Assets\Script\PetBottle.cs" />
     <Compile Include="Assets\Script\PlayerCharacter.cs" />
     <Compile Include="Assets\Script\PlayerControl.cs" />
+    <Compile Include="Assets\Script\ResultManager.cs" />
     <Compile Include="Assets\Script\Sample\UnityCanTest.cs" />
+    <Compile Include="Assets\Script\StageSelectManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\SD Unity-Chan Haon Custom\Shader\Unity-chan Toon Shader Ver 2.0.6\Toon_DoubleShadeWithFeather_Mobile_TransClipping_StencilMask.shader" />
