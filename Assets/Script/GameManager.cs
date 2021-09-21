@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 
         if (gController)
         {
-            if (gController.PushTime() == 0)
+            if (gController.PushTime() < 0)
             {
                 SceneLoad(3);
             }

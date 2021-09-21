@@ -7,7 +7,7 @@ public abstract class ItemBase : MonoBehaviour
 {
     PlayerControl playerControl;
 
-    public abstract void Active();
+    public abstract void Active(string name);
 
     private void Start()
     {
@@ -18,7 +18,7 @@ public abstract class ItemBase : MonoBehaviour
     {
         if (other.gameObject.tag == "Gomibako")
         {
-            Active();
+            Active(other.gameObject.name);
             Destroy(this.gameObject);
         }
     }

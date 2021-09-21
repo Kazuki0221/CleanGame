@@ -19,6 +19,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         int haveCount = 0;//アイテム所持数
 
         public string itemName = null;//アイテム名
+        GameController gameController;
 
         CSlotGrid cSlotGrid;
         ItemSelect itemSelect;
@@ -40,6 +41,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Character = GetComponent<PlayerCharacter>();
             cSlotGrid = GameObject.Find("SlotGrid").GetComponent<CSlotGrid>();
             itemSelect = GameObject.Find("SelectArea").GetComponent<ItemSelect>();
+            gameController = GameObject.Find("GameController").GetComponent<GameController>();
         }
 
 
@@ -96,7 +98,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     {
                         itemName = collision.gameObject.name;
                         Destroy(collision.gameObject);
-                        if(itemName != null)haveCount++;
+                        if (itemName != null)
+                        {
+                            haveCount++;
+                            gameController.itemCount--;
+                        }
                     }
                 }
             }

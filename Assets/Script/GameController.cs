@@ -13,22 +13,23 @@ public class GameController : MonoBehaviour
     /// </summary>
     Vector3 firstPlayerPos;
     Vector3 itemSpownPos;
-    [SerializeField]GameObject playerPrefs;
-    [SerializeField]GameObject itemSpownArea;
-    public CItem [] item;
+    [SerializeField] GameObject playerPrefs;
+    [SerializeField] GameObject itemSpownArea;
+    public CItem[] item;
     public int itemCount = 0;
+    bool itemZero = true;
 
     /// <summary>
     /// UI
     /// </summary>
-    public static int  m_score = 0;//スコア
+    public static int m_score = 0;//スコア
     [SerializeField] Text scoreText;
 
     //タイム
-    float countTime = 10;
+    [SerializeField]float countTime = 10;
     [SerializeField] Color baseColor = new Color(0, 0, 0, 1);
     [SerializeField] Color dgColor = new Color(1, 0, 0, 1);
-    [SerializeField]Text time_text;
+    [SerializeField] Text time_text;
 
 
     // Start is called before the first frame update
@@ -45,7 +46,21 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        InvokeRepeating("Createitem", 2, 1);
+        if(itemCount < 10 && itemZero)
+        {
+            Createitem();
+            itemCount++;
+        }
+
+        if (itemCount == 0)
+        {
+            itemZero = true;
+        }
+        else if (itemCount == 10)
+        {
+            itemZero = false;
+        }
+
         Timer();
 
     }
@@ -56,21 +71,19 @@ public class GameController : MonoBehaviour
         float x = Random.Range(itemSpownArea.transform.position.x - 5, itemSpownArea.transform.position.x + 5);
         float z = Random.Range(itemSpownArea.transform.position.z - 5, itemSpownArea.transform.position.z + 5);
         itemSpownPos = new Vector3(x, itemSpownArea.transform.position.y, z);
-        if (itemCount < 10)
-        {
-            //アイテムをランダムな位置に生成(アイテムの種類もランダム)
-            int kind = Random.Range(0, item.Length);//アイテムのランダム化
 
-            var obj = Instantiate(item[kind].ItemObj, itemSpownPos, item[kind].ItemObj.transform.rotation) as GameObject;
-            obj.name = item[kind].name;
-            itemCount++;
-        }
+        //アイテムをランダムな位置に生成(アイテムの種類もランダム)
+        int kind = Random.Range(0, item.Length);//アイテムのランダム化
+
+        var obj = Instantiate(item[kind].ItemObj, itemSpownPos, item[kind].ItemObj.transform.rotation) as GameObject;
+        obj.name = item[kind].name;
+
     }
 
     public void AddScore(int score)
     {
         m_score += score;
-        scoreText.text ="Score：" + m_score.ToString();
+        scoreText.text = "Score：" + m_score.ToString();
     }
 
     public int GetScore()
