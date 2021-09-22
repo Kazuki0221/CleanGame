@@ -37,8 +37,8 @@ public class GameController : MonoBehaviour
     {
         firstPlayerPos = new Vector3(0, -0.01000017f, 0);
         playerPrefs = CharaSelectManager.chara.character;
-        var charaObj = Instantiate(playerPrefs, firstPlayerPos, playerPrefs.transform.rotation);
-        charaObj.name = playerPrefs.name;
+        //var charaObj = Instantiate(playerPrefs, firstPlayerPos, playerPrefs.transform.rotation);
+        //charaObj.name = playerPrefs.name;
         AddScore(0);
 
     }
@@ -83,12 +83,7 @@ public class GameController : MonoBehaviour
     public void AddScore(int score)
     {
         m_score += score;
-        scoreText.text = "Score：" + m_score.ToString();
-    }
-
-    public int GetScore()
-    {
-        return m_score;
+        scoreText.text = "Score：" + m_score.ToString() + " 点";
     }
 
     void Timer()

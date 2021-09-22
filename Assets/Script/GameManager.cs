@@ -45,6 +45,18 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(SceneManager.GetActiveScene().name == "CharacterSelect")
+            {
+                SceneLoad(0);
+            }
+            else if(SceneManager.GetActiveScene().name == "StageSelect")
+            {
+                SceneLoad(1);
+            }
+        }
+
     }
 
     private void Awake()

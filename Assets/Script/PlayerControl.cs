@@ -106,10 +106,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     }
                 }
             }
-        }
 
-        private void OnTriggerStay(Collider collision)
-        {
             if (collision.gameObject.tag == "Gomibako")
             {
                 Vector3 gPos = collision.gameObject.transform.position;
@@ -124,6 +121,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 }
             }
         }
+
+       
 
         public bool Catch()
         {

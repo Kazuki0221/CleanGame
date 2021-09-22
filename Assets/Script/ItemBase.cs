@@ -14,7 +14,7 @@ public abstract class ItemBase : MonoBehaviour
         playerControl = GameObject.FindWithTag("Player").GetComponent<PlayerControl>();   
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Gomibako")
         {
