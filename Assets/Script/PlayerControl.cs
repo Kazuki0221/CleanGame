@@ -110,7 +110,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (collision.gameObject.tag == "Gomibako")
             {
                 Vector3 gPos = collision.gameObject.transform.position;
-                gPos.y += 5;
+                gPos.y += 3;
                 if (haveCount > 0 && haveCount < 3)
                 {
                     if (m_release && cSlotGrid.ReleseItem(itemSelect.num) != null)

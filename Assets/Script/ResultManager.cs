@@ -50,15 +50,8 @@ public class ResultManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.name == "ToTitle") triggerButton = 0;
-        else if (other.gameObject.name == "ToCharaSelect") triggerButton = 1;
-        else if (other.gameObject.name == "ToStageSelect") triggerButton = 2;
-    }
-
     public int PushTrigger()
     {
-        return triggerButton;
+        return num;
     }
 }

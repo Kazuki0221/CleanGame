@@ -35,10 +35,10 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        firstPlayerPos = new Vector3(0, -0.01000017f, 0);
+        firstPlayerPos = new Vector3(0, 1, 0);
         playerPrefs = CharaSelectManager.chara.character;
-        //var charaObj = Instantiate(playerPrefs, firstPlayerPos, playerPrefs.transform.rotation);
-        //charaObj.name = playerPrefs.name;
+        var charaObj = Instantiate(playerPrefs, firstPlayerPos, playerPrefs.transform.rotation);
+        charaObj.name = playerPrefs.name;
         AddScore(0);
 
     }
@@ -98,10 +98,7 @@ public class GameController : MonoBehaviour
         {
             time_text.color = baseColor;
         }
-        if (countTime < 0)
-        {
-            Time.timeScale = 0;
-        }
+        
     }
 
     public float PushTime()
