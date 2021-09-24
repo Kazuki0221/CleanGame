@@ -115,7 +115,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 {
                     if (m_release && cSlotGrid.ReleseItem(itemSelect.num) != null)
                     {
-                        Instantiate(cSlotGrid.ReleseItem(itemSelect.num).ItemObj, gPos, cSlotGrid.ReleseItem(itemSelect.num).ItemObj.transform.rotation);
+                        var obj = Instantiate(cSlotGrid.ReleseItem(itemSelect.num).ItemObj, gPos, cSlotGrid.ReleseItem(itemSelect.num).ItemObj.transform.rotation);
+                        obj.name = cSlotGrid.ReleseItem(itemSelect.num).ItemName;
                         haveCount--;
                     }
                 }

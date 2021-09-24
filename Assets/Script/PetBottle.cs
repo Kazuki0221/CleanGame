@@ -17,4 +17,5 @@ public class PetBottle : ItemBase
         }
         FindObjectOfType<GameController>().AddScore(m_score);
     }
+
 }

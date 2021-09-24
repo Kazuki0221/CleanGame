@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bin : ItemBase
 {
     [SerializeField] int m_score = 10;
+
     public override void Active(string name)
     {
         if (name == "BinBox")

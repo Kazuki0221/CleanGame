@@ -17,3 +17,4 @@ MonoBehaviour:
   charaBack: {fileID: 21300000, guid: 4a1a461eb8b206741855fd3bf47a52c5, type: 3}
   character: {fileID: 6855094413415533342, guid: 7c0e521901b9d1f4aab03b33ab9226a8,
     type: 3}
+  voice: {fileID: 8300000, guid: c75a6c30d18cdd449a7861370e4a97b8, type: 3}

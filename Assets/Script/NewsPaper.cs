@@ -5,7 +5,7 @@ using UnityEngine;
 public class NewsPaper : ItemBase
 {
     [SerializeField] int m_score = 10;
-    
+
     public override void Active(string name)
     {
         if (name == "NewsBox")

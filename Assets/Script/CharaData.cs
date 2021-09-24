@@ -10,4 +10,5 @@ public class CharaData : ScriptableObject
     public Sprite image;
     public Sprite charaBack;
     public GameObject character;
+    public AudioClip voice;
 }

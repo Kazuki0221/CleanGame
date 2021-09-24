@@ -11,7 +11,7 @@ public abstract class ItemBase : MonoBehaviour
 
     private void Start()
     {
-        playerControl = GameObject.FindWithTag("Player").GetComponent<PlayerControl>();   
+        playerControl = GameObject.FindWithTag("Player").GetComponent<PlayerControl>();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -19,6 +19,7 @@ public abstract class ItemBase : MonoBehaviour
         if (other.gameObject.tag == "Gomibako")
         {
             Active(other.gameObject.name);
+            
             Destroy(this.gameObject);
         }
     }

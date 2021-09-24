@@ -19,12 +19,14 @@ public class CharaSelectManager : MonoBehaviour
     [SerializeField] Image c_back; 
     [SerializeField] Text charaName; 
     [SerializeField] List<CharaData> charaData = new List<CharaData>();//全キャラデータ
+    AudioSource source;
     // Start is called before the first frame update
     void Start()
     {
         areaPos = character[0].transform.position;
         areaPos.y += 1;
         this.transform.position = areaPos;
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -63,7 +65,8 @@ public class CharaSelectManager : MonoBehaviour
         charaName.text = charaData[num].Name;
         //キャラ確定
         if (Input.GetKey(KeyCode.Return))
-        { 
+        {
+            source.PlayOneShot(charaData[num].voice);
             chara = charaData[num];
         }
     }

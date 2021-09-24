@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     GameObject LoadingUI;
     Slider slider;
 
+    AudioSource source;
+    [SerializeField]AudioClip start;
+
     /// <summary>
     /// SceneLoad(num)関数内訳
     /// 0→タイトルシーン、1→キャラ選択シーン
@@ -73,6 +76,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        source = GetComponent<AudioSource>();
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -80,23 +84,30 @@ public class GameManager : MonoBehaviour
     {
         if(trigger == 0)
         {
+            source.PlayOneShot(start);
+            yield return new WaitForSeconds(1);
             async = SceneManager.LoadSceneAsync("Title");
         }
         else if(trigger == 1)
         {
+            yield return new WaitForSeconds(1);
             async = SceneManager.LoadSceneAsync("CharacterSelect");
         }
         else if(trigger == 2)
         {
+            yield return new WaitForSeconds(1);
             async = SceneManager.LoadSceneAsync("StageSelect");
         }
         else if(trigger == 3)
         {
+            yield return new WaitForSeconds(1);
+
             StageSelectManager sManager = FindObjectOfType<StageSelectManager>();
             async = SceneManager.LoadSceneAsync(sManager.StageName());
         }
         else if(trigger == 4)
         {
+            yield return new WaitForSeconds(2);
             async = SceneManager.LoadSceneAsync("ResultScene");
         }
 
