@@ -62,6 +62,7 @@
     <Compile Include="Assets\Script\CSlotGrid.cs" />
     <Compile Include="Assets\Script\CharaData.cs" />
     <Compile Include="Assets\Script\CharaSelectManager.cs" />
+    <Compile Include="Assets\Script\Flash.cs" />
     <Compile Include="Assets\Script\GameController.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\ItemBase.cs" />

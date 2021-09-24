@@ -16,6 +16,7 @@ public class CharaSelectManager : MonoBehaviour
     float delayInput;
 
     [SerializeField] Image image;//立ち絵
+    [SerializeField] Image c_back; 
     [SerializeField] Text charaName; 
     [SerializeField] List<CharaData> charaData = new List<CharaData>();//全キャラデータ
     // Start is called before the first frame update
@@ -58,6 +59,7 @@ public class CharaSelectManager : MonoBehaviour
         }
 
         image.sprite = charaData[num].image;
+        c_back.sprite = charaData[num].charaBack;
         charaName.text = charaData[num].Name;
         //キャラ確定
         if (Input.GetKey(KeyCode.Return))

@@ -1,39 +1,51 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-   
+    private AsyncOperation async;
+    GameObject LoadingUI;
+    Slider slider;
+
     /// <summary>
     /// SceneLoad(num)関数内訳
     /// 0→タイトルシーン、1→キャラ選択シーン
-    /// 2→ステージ選択シーン、3→リザルトシーン
+    /// 2→ステージ選択シーン、3→ステージ遷移
+    /// 4→リザルトシーン
     /// </summary>
     void Update()
     {
         GameController gController = FindObjectOfType<GameController>();
+        if (GameObject.Find("Loading"))
+        {
+            LoadingUI = GameObject.Find("Loading");
+            slider = FindObjectOfType<Slider>();
+            LoadingUI.SetActive(false);
+        }
+
 
         if (Input.GetKey(KeyCode.Return))
         {
+            LoadingUI.SetActive(true);
             if (SceneManager.GetActiveScene().name == "Title")//タイトルシーン
             {
-                SceneLoad(1);
+                StartCoroutine(SceneLoad(1));
             }
             else if(SceneManager.GetActiveScene().name == "CharacterSelect")//キャラ選択シーン
             {
-                SceneLoad(2);
+                StartCoroutine(SceneLoad(2));
             }
             else if(SceneManager.GetActiveScene().name == "StageSelect")
             {
-                StageSelectManager sManager = FindObjectOfType<StageSelectManager>();
-                SceneManager.LoadScene(sManager.StageName());
+                StartCoroutine(SceneLoad(3));
             }
             else if (SceneManager.GetActiveScene().name == "ResultScene")//リザルトシーン
             {
                 ResultManager resultManager = FindObjectOfType<ResultManager>();
-                SceneLoad(resultManager.PushTrigger());
+                StartCoroutine(SceneLoad(resultManager.PushTrigger()));
             }
         }
 
@@ -41,7 +53,7 @@ public class GameManager : MonoBehaviour
         {
             if (gController.PushTime() < 0)
             {
-                SceneLoad(3);
+                StartCoroutine(SceneLoad(4));
             }
         }
 
@@ -49,11 +61,11 @@ public class GameManager : MonoBehaviour
         {
             if(SceneManager.GetActiveScene().name == "CharacterSelect")
             {
-                SceneLoad(0);
+                StartCoroutine(SceneLoad(0));
             }
             else if(SceneManager.GetActiveScene().name == "StageSelect")
             {
-                SceneLoad(1);
+                StartCoroutine(SceneLoad(1));
             }
         }
 
@@ -64,23 +76,37 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    void SceneLoad(int trigger)
+    IEnumerator SceneLoad(int trigger)
     {
         if(trigger == 0)
         {
-            SceneManager.LoadScene("Title");
+            async = SceneManager.LoadSceneAsync("Title");
         }
         else if(trigger == 1)
         {
-            SceneManager.LoadScene("CharacterSelect");
+            async = SceneManager.LoadSceneAsync("CharacterSelect");
         }
         else if(trigger == 2)
         {
-            SceneManager.LoadScene("StageSelect");
+            async = SceneManager.LoadSceneAsync("StageSelect");
         }
         else if(trigger == 3)
         {
-            SceneManager.LoadScene("ResultScene");
+            StageSelectManager sManager = FindObjectOfType<StageSelectManager>();
+            async = SceneManager.LoadSceneAsync(sManager.StageName());
+        }
+        else if(trigger == 4)
+        {
+            async = SceneManager.LoadSceneAsync("ResultScene");
+        }
+
+        while (!async.isDone)
+        {
+            var progressVal = Mathf.Clamp01(async.progress / 0.9f);
+            slider.value = progressVal;
+            yield return null;
         }
     }
+
+   
 }

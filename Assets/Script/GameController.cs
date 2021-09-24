@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Text scoreText;
 
     //タイム
-    [SerializeField]float countTime = 10;
+    [SerializeField]float countTime = 60;
     [SerializeField] Color baseColor = new Color(0, 0, 0, 1);
     [SerializeField] Color dgColor = new Color(1, 0, 0, 1);
     [SerializeField] Text time_text;
@@ -40,7 +40,6 @@ public class GameController : MonoBehaviour
         var charaObj = Instantiate(playerPrefs, firstPlayerPos, playerPrefs.transform.rotation);
         charaObj.name = playerPrefs.name;
         AddScore(0);
-
     }
 
     // Update is called once per frame
@@ -60,7 +59,7 @@ public class GameController : MonoBehaviour
         {
             itemZero = false;
         }
-
+        
         Timer();
 
     }
