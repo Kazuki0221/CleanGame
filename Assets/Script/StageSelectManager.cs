@@ -13,10 +13,14 @@ public class StageSelectManager : MonoBehaviour
 
     float delayInput;
 
+    AudioSource source;
+    [SerializeField] AudioClip []sound;
+
     // Start is called before the first frame update
     void Start()
     {
         image.sprite = stages[0];
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -33,6 +37,7 @@ public class StageSelectManager : MonoBehaviour
         {
             num++;
             if (num >= stages.Count) num = stages.Count - 1;
+            Sound(0);
             delayInput += 0.2f;
             //StartCoroutine(Select(aroowButton[1]));
         }
@@ -40,8 +45,19 @@ public class StageSelectManager : MonoBehaviour
         {
             num--;
             if (num < 0) num = 0;
+            Sound(0);
             delayInput += 0.2f;
             //StartCoroutine(Select(aroowButton[0]));
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Sound(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Sound(2);
         }
 
         image.sprite = stages[num];
@@ -63,6 +79,22 @@ public class StageSelectManager : MonoBehaviour
     public string StageName()
     {
         return stages[num].name;
+    }
+
+    void Sound(int trigger)
+    {
+        if(trigger == 0)//移動
+        {
+            source.PlayOneShot(sound[trigger]);
+        }
+        else if(trigger == 1)//決定
+        {
+            source.PlayOneShot(sound[trigger]);
+        }
+        else if(trigger == 2)//戻る
+        {
+            source.PlayOneShot(sound[trigger]);
+        }
     }
 
 }

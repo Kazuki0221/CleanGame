@@ -12,18 +12,19 @@ public class ResultManager : MonoBehaviour
     [Range(0, 2)]
     int num;
     float delayInput;
-    int triggerButton;
 
-    // Start is called before the first frame update
+    AudioSource source;
+    [SerializeField]AudioClip[] sound;
+
     void Start()
     {
         highScore = GameController.m_score;
         result_text.text = "Your Score : " + highScore.ToString() + "点";
 
         this.transform.position = images[0].transform.position;
+        source = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -39,6 +40,7 @@ public class ResultManager : MonoBehaviour
             num++;
             if (num > 2) num = 0;
             this.transform.position = images[num].transform.position;
+            Sound(0);
             delayInput += 0.2f;
         }
         else if (h < 0)
@@ -46,12 +48,30 @@ public class ResultManager : MonoBehaviour
             num--;
             if (num < 0) num = 0;
             this.transform.position = images[num].transform.position;
+            Sound(0);
             delayInput += 0.2f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Sound(1);
         }
     }
 
     public int PushTrigger()
     {
         return num;
+    }
+
+    void Sound(int trigger)
+    {
+        if (trigger == 0)//移動
+        {
+            source.PlayOneShot(sound[trigger]);
+        }
+        else if (trigger == 1)//決定
+        {
+            source.PlayOneShot(sound[trigger]);
+        }
     }
 }

@@ -6,13 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private AsyncOperation async;
-    GameObject LoadingUI;
-    Slider slider;
+    //private AsyncOperation async;
+    //GameObject LoadingUI;
+    //Slider slider;
+    //bool load = false;
 
-    AudioSource source;
-    [SerializeField]AudioClip start;
-
+    StageSelectManager sManager;
     /// <summary>
     /// SceneLoad(num)関数内訳
     /// 0→タイトルシーン、1→キャラ選択シーン
@@ -22,17 +21,16 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         GameController gController = FindObjectOfType<GameController>();
-        if (GameObject.Find("Loading"))
-        {
-            LoadingUI = GameObject.Find("Loading");
-            slider = FindObjectOfType<Slider>();
-            LoadingUI.SetActive(false);
-        }
+        //if (GameObject.Find("Loading"))
+        //{
+        //    LoadingUI = GameObject.Find("Loading");
+        //    slider = FindObjectOfType<Slider>();
+        //    LoadingUI.SetActive(false);
+        //}
 
 
         if (Input.GetKey(KeyCode.Return))
         {
-            LoadingUI.SetActive(true);
             if (SceneManager.GetActiveScene().name == "Title")//タイトルシーン
             {
                 StartCoroutine(SceneLoad(1));
@@ -43,6 +41,7 @@ public class GameManager : MonoBehaviour
             }
             else if(SceneManager.GetActiveScene().name == "StageSelect")
             {
+                sManager = FindObjectOfType<StageSelectManager>();
                 StartCoroutine(SceneLoad(3));
             }
             else if (SceneManager.GetActiveScene().name == "ResultScene")//リザルトシーン
@@ -76,7 +75,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        source = GetComponent<AudioSource>();
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -84,39 +82,51 @@ public class GameManager : MonoBehaviour
     {
         if(trigger == 0)
         {
-            source.PlayOneShot(start);
-            yield return new WaitForSeconds(1);
-            async = SceneManager.LoadSceneAsync("Title");
+            //yield return new WaitForSeconds(0.2f);
+            //LoadingUI.SetActive(true);
+            //yield return new WaitForSeconds(1);
+            //async = SceneManager.LoadSceneAsync("Title");
+            SceneManager.LoadScene("Title");
         }
         else if(trigger == 1)
         {
-            yield return new WaitForSeconds(1);
-            async = SceneManager.LoadSceneAsync("CharacterSelect");
+            yield return new WaitForSeconds(0.2f);
+            //LoadingUI.SetActive(true);
+            //yield return new WaitForSeconds(1);
+            //async = SceneManager.LoadSceneAsync("CharacterSelect");
+            SceneManager.LoadScene("CharacterSelect");
         }
         else if(trigger == 2)
         {
-            yield return new WaitForSeconds(1);
-            async = SceneManager.LoadSceneAsync("StageSelect");
+            yield return new WaitForSeconds(0.5f);
+            //LoadingUI.SetActive(true);
+            //yield return new WaitForSeconds(1);
+            //async = SceneManager.LoadSceneAsync("StageSelect");
+            SceneManager.LoadScene("StageSelect");
         }
         else if(trigger == 3)
         {
-            yield return new WaitForSeconds(1);
-
-            StageSelectManager sManager = FindObjectOfType<StageSelectManager>();
-            async = SceneManager.LoadSceneAsync(sManager.StageName());
+            yield return new WaitForSeconds(0.2f);
+            //LoadingUI.SetActive(true);
+            //yield return new WaitForSeconds(1);
+            //async = SceneManager.LoadSceneAsync(sManager.StageName());
+            SceneManager.LoadScene(sManager.StageName());
         }
         else if(trigger == 4)
         {
-            yield return new WaitForSeconds(2);
-            async = SceneManager.LoadSceneAsync("ResultScene");
+            yield return new WaitForSeconds(0.2f);
+            //LoadingUI.SetActive(true);
+            //yield return new WaitForSeconds(1);
+
+            //async = SceneManager.LoadSceneAsync("ResultScene");
+            SceneManager.LoadScene("ResultScene");
         }
 
-        while (!async.isDone)
-        {
-            var progressVal = Mathf.Clamp01(async.progress / 0.9f);
-            slider.value = progressVal;
-            yield return null;
-        }
+        //while (load && slider.value < 1)
+        //{
+        //    slider.value += 0.2f;
+        //    yield return null;
+        //}
     }
 
    

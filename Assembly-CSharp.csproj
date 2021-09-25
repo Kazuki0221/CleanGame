@@ -75,6 +75,7 @@
     <Compile Include="Assets\Script\ResultManager.cs" />
     <Compile Include="Assets\Script\Sample\UnityCanTest.cs" />
     <Compile Include="Assets\Script\StageSelectManager.cs" />
+    <Compile Include="Assets\Script\TitleManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\SD Unity-Chan Haon Custom\Shader\Unity-chan Toon Shader Ver 2.0.6\Toon_DoubleShadeWithFeather_Mobile_TransClipping_StencilMask.shader" />

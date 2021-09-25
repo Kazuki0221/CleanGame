@@ -14,19 +14,22 @@ public class CharaSelectManager : MonoBehaviour
     Vector3 areaPos;//SelectAreaの位置
 
     float delayInput;
+    bool trigger;
 
     [SerializeField] Image image;//立ち絵
     [SerializeField] Image c_back; 
     [SerializeField] Text charaName; 
     [SerializeField] List<CharaData> charaData = new List<CharaData>();//全キャラデータ
     AudioSource source;
-    // Start is called before the first frame update
+    [SerializeField] AudioClip []sound;
+
     void Start()
     {
         areaPos = character[0].transform.position;
         areaPos.y += 1;
         this.transform.position = areaPos;
         source = GetComponent<AudioSource>();
+        trigger = false;
     }
 
     // Update is called once per frame
@@ -48,6 +51,7 @@ public class CharaSelectManager : MonoBehaviour
             areaPos = character[num].transform.position;
             areaPos.y += 1;
             this.transform.position = areaPos;
+            source.PlayOneShot(sound[0]);
             delayInput = 0.2f;
         }
         else if(h < 0)
@@ -57,6 +61,7 @@ public class CharaSelectManager : MonoBehaviour
             areaPos = character[num].transform.position;
             areaPos.y += 1;
             this.transform.position = areaPos;
+            source.PlayOneShot(sound[0]);
             delayInput = 0.2f;
         }
 
@@ -64,10 +69,16 @@ public class CharaSelectManager : MonoBehaviour
         c_back.sprite = charaData[num].charaBack;
         charaName.text = charaData[num].Name;
         //キャラ確定
-        if (Input.GetKey(KeyCode.Return))
+        if (Input.GetKey(KeyCode.Return) && !trigger)
         {
             source.PlayOneShot(charaData[num].voice);
             chara = charaData[num];
+            trigger = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            source.PlayOneShot(sound[1]);
         }
     }
 
