@@ -105,8 +105,8 @@ public class GameController : MonoBehaviour
     void Createitem()
     {
         //ランダムの位置
-        float x = Random.Range(itemSpownArea.transform.position.x - 5, itemSpownArea.transform.position.x + 5);
-        float z = Random.Range(itemSpownArea.transform.position.z - 5, itemSpownArea.transform.position.z + 5);
+        float x = Random.Range(itemSpownArea.transform.position.x - 8, itemSpownArea.transform.position.x + 8);
+        float z = Random.Range(itemSpownArea.transform.position.z - 8, itemSpownArea.transform.position.z + 8);
         itemSpownPos = new Vector3(x, itemSpownArea.transform.position.y, z);
 
         //アイテムをランダムな位置に生成(アイテムの種類もランダム)
