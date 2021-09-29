@@ -32,13 +32,16 @@ public class GameController : MonoBehaviour
 
 
     //タイム
-    [SerializeField]float countTime = 60;
+    float countDown = 4;
+    [SerializeField]float totalTime = 60;
     [SerializeField] Color baseColor = new Color(0, 0, 0, 1);
     [SerializeField] Color dgColor = new Color(1, 0, 0, 1);
     [SerializeField] Text time_text;
+    [SerializeField] Text countDown_text;
     [SerializeField] GameObject timeUpText;
     [SerializeField] AudioClip stop;
     bool timeUp;
+    int count;
 
 
 
@@ -46,9 +49,9 @@ public class GameController : MonoBehaviour
     void Start()
     {
         firstPlayerPos = new Vector3(0, 1, 0);
-        //playerPrefs = CharaSelectManager.chara.character;
-        //var charaObj = Instantiate(playerPrefs, firstPlayerPos, playerPrefs.transform.rotation);
-        //charaObj.name = playerPrefs.name;
+        playerPrefs = CharaSelectManager.chara.character;
+        var charaObj = Instantiate(playerPrefs, firstPlayerPos, playerPrefs.transform.rotation);
+        charaObj.name = playerPrefs.name;
         AddScore(0);
         timeUpText.SetActive(false);
 
@@ -89,11 +92,23 @@ public class GameController : MonoBehaviour
         }
 
         //Timer
-        if (countTime > 0)
+        if (countDown >= 0)
         {
+            if(countDown == 4)
+            {
+
+            }
+            countDown -= Time.deltaTime;
+            count = (int)countDown;
+            countDown_text.text = count.ToString();
+
+        }
+        if(countDown < 0)
+        {
+            countDown_text.text = "";
             Timer();
         }
-        else if(countTime < 0 && !timeUp)
+        if(totalTime < 0 && !timeUp)
         {
             source.PlayOneShot(stop);
             timeUpText.SetActive(true);
@@ -128,9 +143,9 @@ public class GameController : MonoBehaviour
 
     void Timer()
     {
-        countTime -= Time.deltaTime;
-        time_text.text = countTime.ToString("F0");
-        if (countTime <= 10)
+        totalTime -= Time.deltaTime;
+        time_text.text = totalTime.ToString("F0");
+        if (totalTime <= 10)
         {
             time_text.color = dgColor;
         }
@@ -141,9 +156,14 @@ public class GameController : MonoBehaviour
         
     }
 
+    public float CountDown()
+    {
+        return countDown;
+    }
+
     public float PushTime()
     {
-        return countTime;
+        return totalTime;
     }
 
 }

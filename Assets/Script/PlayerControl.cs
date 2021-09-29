@@ -15,6 +15,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
         bool m_catch;//拾う
         bool m_release;//放す
+        float h;
+        float v;
+        bool crouch;
 
         int haveCount = 0;//アイテム所持数
 
@@ -57,12 +60,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         // Fixed update is called in sync with physics
         private void FixedUpdate()
         {
-            // read inputs
-            float h = CrossPlatformInputManager.GetAxis("Horizontal");
-            float v = CrossPlatformInputManager.GetAxis("Vertical");
-            bool crouch = Input.GetKey(KeyCode.C);
-            m_catch = Input.GetButton("Fire1");
-            m_release = Input.GetButton("Fire2");
+            if (gameController.CountDown() <= 0)
+            {
+                // read inputs
+                h = CrossPlatformInputManager.GetAxis("Horizontal");
+                v = CrossPlatformInputManager.GetAxis("Vertical");
+                crouch = Input.GetKey(KeyCode.C);
+                m_catch = Input.GetButton("Fire1");
+                m_release = Input.GetButton("Fire2");
+            }
 
             // calculate move direction to pass to character
             if (m_Cam != null)
@@ -110,7 +116,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (collision.gameObject.tag == "Gomibako")
             {
                 Vector3 gPos = collision.gameObject.transform.position;
-                gPos.y += 3;
+                gPos.y += 1.5f;
                 if (haveCount > 0 && haveCount < 3)
                 {
                     if (m_release && cSlotGrid.ReleseItem(itemSelect.num) != null)

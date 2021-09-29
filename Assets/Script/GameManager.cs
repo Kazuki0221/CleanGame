@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    //private AsyncOperation async;
-    //GameObject LoadingUI;
-    //Slider slider;
-    //bool load = false;
+    private AsyncOperation async;
+    GameObject LoadingUI;
+    Slider slider;
+    bool load = false;
 
     StageSelectManager sManager;
     /// <summary>
@@ -21,12 +21,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         GameController gController = FindObjectOfType<GameController>();
-        //if (GameObject.Find("Loading"))
-        //{
-        //    LoadingUI = GameObject.Find("Loading");
-        //    slider = FindObjectOfType<Slider>();
-        //    LoadingUI.SetActive(false);
-        //}
+        if (GameObject.Find("Loading"))
+        {
+            LoadingUI = GameObject.Find("Loading");
+            slider = FindObjectOfType<Slider>();
+            LoadingUI.SetActive(false);
+        }
 
 
         if (Input.GetKey(KeyCode.Return))
@@ -82,51 +82,52 @@ public class GameManager : MonoBehaviour
     {
         if(trigger == 0)
         {
-            //yield return new WaitForSeconds(0.2f);
-            //LoadingUI.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+            LoadingUI.SetActive(true);
             //yield return new WaitForSeconds(1);
-            //async = SceneManager.LoadSceneAsync("Title");
-            SceneManager.LoadScene("Title");
+            async = SceneManager.LoadSceneAsync("Title");
+            //SceneManager.LoadScene("Title");
         }
         else if(trigger == 1)
         {
             yield return new WaitForSeconds(0.2f);
-            //LoadingUI.SetActive(true);
+            LoadingUI.SetActive(true);
             //yield return new WaitForSeconds(1);
-            //async = SceneManager.LoadSceneAsync("CharacterSelect");
-            SceneManager.LoadScene("CharacterSelect");
+            async = SceneManager.LoadSceneAsync("CharacterSelect");
+            //SceneManager.LoadScene("CharacterSelect");
         }
         else if(trigger == 2)
         {
             yield return new WaitForSeconds(0.5f);
-            //LoadingUI.SetActive(true);
+            LoadingUI.SetActive(true);
             //yield return new WaitForSeconds(1);
-            //async = SceneManager.LoadSceneAsync("StageSelect");
-            SceneManager.LoadScene("StageSelect");
+            async = SceneManager.LoadSceneAsync("StageSelect");
+            //SceneManager.LoadScene("StageSelect");
         }
         else if(trigger == 3)
         {
             yield return new WaitForSeconds(0.2f);
-            //LoadingUI.SetActive(true);
+            LoadingUI.SetActive(true);
             //yield return new WaitForSeconds(1);
-            //async = SceneManager.LoadSceneAsync(sManager.StageName());
-            SceneManager.LoadScene(sManager.StageName());
+            async = SceneManager.LoadSceneAsync(sManager.StageName());
+            //SceneManager.LoadScene(sManager.StageName());
         }
         else if(trigger == 4)
         {
             yield return new WaitForSeconds(0.2f);
-            //LoadingUI.SetActive(true);
+            LoadingUI.SetActive(true);
             //yield return new WaitForSeconds(1);
 
-            //async = SceneManager.LoadSceneAsync("ResultScene");
-            SceneManager.LoadScene("ResultScene");
+            async = SceneManager.LoadSceneAsync("ResultScene");
+            //SceneManager.LoadScene("ResultScene");
         }
 
-        //while (load && slider.value < 1)
-        //{
-        //    slider.value += 0.2f;
-        //    yield return null;
-        //}
+        while (load && slider.value < 1)
+        {
+            var progressVal = Mathf.Clamp01(async.progress / 0.9f);
+            slider.value = progressVal;
+            yield return null;
+        }
     }
 
    

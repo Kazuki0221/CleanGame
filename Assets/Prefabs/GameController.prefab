@@ -55,7 +55,7 @@ MonoBehaviour:
   sound:
   - {fileID: 8300000, guid: 00c2c11071ed94447ba4398ed28329ea, type: 3}
   - {fileID: 8300000, guid: bc5003266f3cb22429050f78cf4a23c2, type: 3}
-  countTime: 10
+  countTime: 70
   baseColor: {r: 0, g: 0, b: 0, a: 1}
   dgColor: {r: 1, g: 0, b: 0, a: 1}
   time_text: {fileID: 0}
@@ -71,7 +71,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d7592fc7808309c48b4fac7b128193bb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a31dbbbae383e6e4db47d5dcf4bf2d77, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

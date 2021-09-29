@@ -54,6 +54,7 @@ public class ResultManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            GameController.m_score = 0;
             Sound(1);
         }
     }

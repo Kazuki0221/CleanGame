@@ -32,7 +32,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		bool m_release;//捨てる
 
 
-		void Start()
+		void Awake()
 		{
 			m_Animator = GetComponent<Animator>();
 			m_Rigidbody = GetComponent<Rigidbody>();
