@@ -52,7 +52,7 @@ public class ResultManager : MonoBehaviour
             delayInput += 0.2f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetButton("Fire1"))
         {
             GameController.m_score = 0;
             Sound(1);

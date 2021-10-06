@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     Vector3 itemSpownPos;
     [SerializeField] GameObject playerPrefs;
     [SerializeField] GameObject itemSpownArea;
+    GameObject charaObj;
+
     public CItem[] item;
     public int itemCount = 0;
     bool itemZero = true;
@@ -50,7 +52,7 @@ public class GameController : MonoBehaviour
     {
         firstPlayerPos = new Vector3(0, 1, 0);
         playerPrefs = CharaSelectManager.chara.character;
-        var charaObj = Instantiate(playerPrefs, firstPlayerPos, playerPrefs.transform.rotation);
+        charaObj = Instantiate(playerPrefs, firstPlayerPos, playerPrefs.transform.rotation);
         charaObj.name = playerPrefs.name;
         AddScore(0);
         timeUpText.SetActive(false);
@@ -113,6 +115,11 @@ public class GameController : MonoBehaviour
             source.PlayOneShot(stop);
             timeUpText.SetActive(true);
             timeUp = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            charaObj.transform.position = firstPlayerPos;
         }
 
     }

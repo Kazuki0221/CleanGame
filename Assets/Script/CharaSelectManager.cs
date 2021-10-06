@@ -69,7 +69,7 @@ public class CharaSelectManager : MonoBehaviour
         c_back.sprite = charaData[num].charaBack;
         charaName.text = charaData[num].Name;
         //キャラ確定
-        if (Input.GetKey(KeyCode.Return) && !trigger)
+        if ((Input.GetKey(KeyCode.Return)|| Input.GetButton("Fire1"))&& !trigger)
         {
             source.PlayOneShot(charaData[num].voice);
             chara = charaData[num];

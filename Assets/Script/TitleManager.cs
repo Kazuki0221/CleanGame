@@ -14,7 +14,7 @@ public class TitleManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Fire1"))
         {
             source.PlayOneShot(start);
         }

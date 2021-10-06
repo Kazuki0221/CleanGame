@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if (Input.GetKey(KeyCode.Return))
+        if (Input.GetKey(KeyCode.Return) || Input.GetButton("Fire1")) 
         {
             if (SceneManager.GetActiveScene().name == "Title")//タイトルシーン
             {

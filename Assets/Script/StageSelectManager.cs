@@ -36,7 +36,7 @@ public class StageSelectManager : MonoBehaviour
         if (h > 0)//右
         {
             num++;
-            if (num >= stages.Count) num = stages.Count - 1;
+            if (num >= stages.Count) num = 0;
             Sound(0);
             delayInput += 0.2f;
             //StartCoroutine(Select(aroowButton[1]));
@@ -44,13 +44,13 @@ public class StageSelectManager : MonoBehaviour
         else if (h < 0)//左
         {
             num--;
-            if (num < 0) num = 0;
+            if (num < 0) num = stages.Count - 1;
             Sound(0);
             delayInput += 0.2f;
             //StartCoroutine(Select(aroowButton[0]));
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetButton("Fire1"))
         {
             Sound(1);
         }

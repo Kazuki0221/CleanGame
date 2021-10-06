@@ -586,6 +586,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5ff08c096428722469c328c2c8b93dca, type: 3}
   - {fileID: 21300000, guid: 587693707011ea64e8645e9cd06a9d2f, type: 3}
   - {fileID: 21300000, guid: 1d4c549ba0f186545a5086f2b8e5f2a4, type: 3}
+  - {fileID: 21300000, guid: f5f19ec3c34fd6848ac377bb7e5bd11b, type: 3}
   image: {fileID: 1827319186}
   aroowButton:
   - {fileID: 1170025252}
