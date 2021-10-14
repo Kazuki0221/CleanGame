@@ -74,7 +74,8 @@ public class GameController : MonoBehaviour
         {
             itemZero = true;
         }
-        else if (itemCount == 10)
+        
+        if (itemCount == 10)
         {
             itemZero = false;
         }

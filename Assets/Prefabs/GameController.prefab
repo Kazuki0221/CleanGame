@@ -55,10 +55,11 @@ MonoBehaviour:
   sound:
   - {fileID: 8300000, guid: 00c2c11071ed94447ba4398ed28329ea, type: 3}
   - {fileID: 8300000, guid: bc5003266f3cb22429050f78cf4a23c2, type: 3}
-  countTime: 70
+  totalTime: 60
   baseColor: {r: 0, g: 0, b: 0, a: 1}
   dgColor: {r: 1, g: 0, b: 0, a: 1}
   time_text: {fileID: 0}
+  countDown_text: {fileID: 0}
   timeUpText: {fileID: 0}
   stop: {fileID: 8300000, guid: 4e6087b877fb5b24facc6523c5af8be8, type: 3}
 --- !u!82 &2055399248
