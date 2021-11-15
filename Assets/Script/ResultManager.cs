@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
+using DG.Tweening;
 
 public class ResultManager : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class ResultManager : MonoBehaviour
     void Start()
     {
         highScore = GameController.m_score;
-        result_text.text = "Your Score : " + highScore.ToString() + "点";
+        //result_text.DOCounter(0, highScore);
+        result_text.text = highScore.ToString();
 
         this.transform.position = images[0].transform.position;
         source = GetComponent<AudioSource>();

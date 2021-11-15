@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     private AsyncOperation async;
     GameObject LoadingUI;
     Slider slider;
-    bool load = false;
 
     StageSelectManager sManager;
     /// <summary>
@@ -39,7 +38,7 @@ public class GameManager : MonoBehaviour
             {
                 StartCoroutine(SceneLoad(2));
             }
-            else if(SceneManager.GetActiveScene().name == "StageSelect")
+            else if(SceneManager.GetActiveScene().name == "StageSelect")//ステージ選択シーン
             {
                 sManager = FindObjectOfType<StageSelectManager>();
                 StartCoroutine(SceneLoad(3));
@@ -84,45 +83,35 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.2f);
             LoadingUI.SetActive(true);
-            //yield return new WaitForSeconds(1);
             async = SceneManager.LoadSceneAsync("Title");
-            //SceneManager.LoadScene("Title");
         }
         else if(trigger == 1)
         {
             yield return new WaitForSeconds(0.2f);
             LoadingUI.SetActive(true);
-            //yield return new WaitForSeconds(1);
             async = SceneManager.LoadSceneAsync("CharacterSelect");
-            //SceneManager.LoadScene("CharacterSelect");
         }
         else if(trigger == 2)
         {
             yield return new WaitForSeconds(0.5f);
             LoadingUI.SetActive(true);
-            //yield return new WaitForSeconds(1);
             async = SceneManager.LoadSceneAsync("StageSelect");
-            //SceneManager.LoadScene("StageSelect");
         }
         else if(trigger == 3)
         {
             yield return new WaitForSeconds(0.2f);
             LoadingUI.SetActive(true);
-            //yield return new WaitForSeconds(1);
             async = SceneManager.LoadSceneAsync(sManager.StageName());
-            //SceneManager.LoadScene(sManager.StageName());
         }
         else if(trigger == 4)
         {
             yield return new WaitForSeconds(0.2f);
             LoadingUI.SetActive(true);
-            //yield return new WaitForSeconds(1);
 
             async = SceneManager.LoadSceneAsync("ResultScene");
-            //SceneManager.LoadScene("ResultScene");
         }
 
-        while (load && slider.value < 1)
+        while (slider.value < 1)
         {
             var progressVal = Mathf.Clamp01(async.progress / 0.9f);
             slider.value = progressVal;

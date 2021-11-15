@@ -13,13 +13,12 @@ public class GameController : MonoBehaviour
     /// </summary>
     Vector3 firstPlayerPos;
     Vector3 itemSpownPos;
-    [SerializeField] GameObject playerPrefs;
-    [SerializeField] GameObject itemSpownArea;
+    [SerializeField] GameObject playerPrefs; //選択キャラ
+    [SerializeField] GameObject itemSpownArea;//アイテム生成位置
     GameObject charaObj;
 
     public CItem[] item;
     public int itemCount = 0;
-    bool itemZero = true;
 
     AudioSource source;
 
@@ -64,20 +63,10 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(itemCount < 10 && itemZero)
-        {
-            Createitem();
-            itemCount++;
-        }
 
         if (itemCount == 0)
         {
-            itemZero = true;
-        }
-        
-        if (itemCount == 10)
-        {
-            itemZero = false;
+            Createitem();
         }
 
         //Score
@@ -97,10 +86,7 @@ public class GameController : MonoBehaviour
         //Timer
         if (countDown >= 0)
         {
-            if(countDown == 4)
-            {
-
-            }
+            
             countDown -= Time.deltaTime;
             count = (int)countDown;
             countDown_text.text = count.ToString();
@@ -127,16 +113,21 @@ public class GameController : MonoBehaviour
 
     void Createitem()
     {
-        //ランダムの位置
-        float x = Random.Range(itemSpownArea.transform.position.x - 8, itemSpownArea.transform.position.x + 8);
-        float z = Random.Range(itemSpownArea.transform.position.z - 8, itemSpownArea.transform.position.z + 8);
-        itemSpownPos = new Vector3(x, itemSpownArea.transform.position.y, z);
+        for (int iCount = 0; iCount < 10; iCount++)
+        {
+            //ランダムの位置
+            float x = Random.Range(itemSpownArea.transform.position.x - 8, itemSpownArea.transform.position.x + 8);
+            float z = Random.Range(itemSpownArea.transform.position.z - 8, itemSpownArea.transform.position.z + 8);
+            itemSpownPos = new Vector3(x, itemSpownArea.transform.position.y, z);
 
-        //アイテムをランダムな位置に生成(アイテムの種類もランダム)
-        int kind = Random.Range(0, item.Length);//アイテムのランダム化
+            //アイテムをランダムな位置に生成(アイテムの種類もランダム)
+            int kind = Random.Range(0, item.Length);//アイテムのランダム化
 
-        var obj = Instantiate(item[kind].ItemObj, itemSpownPos, item[kind].ItemObj.transform.rotation) as GameObject;
-        obj.name = item[kind].name;
+            var obj = Instantiate(item[kind].ItemObj, itemSpownPos, item[kind].ItemObj.transform.rotation) as GameObject;
+            obj.name = item[kind].name;
+
+            itemCount = iCount;
+        }
 
     }
 
