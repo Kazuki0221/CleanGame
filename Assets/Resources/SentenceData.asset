@@ -27,5 +27,14 @@ MonoBehaviour:
     - id: 0
       name: "\u3053\u306F\u304F"
       sentence: "\u4F55\u3067\u3082\u306A\u3044\u308F\uFF01"
+    - id: 2
+      name: "\u3086\u3046\u3053"
+      sentence: "\u3075\u3041\u2026\u3001\u7720\u3044"
+    - id: 1
+      name: "\u307F\u3055\u304D"
+      sentence: "\u30B7\u30E3\u30AD\u30C3\u3068\u3057\u306A\u3055\u3044\uFF01"
+    - id: 0
+      name: "\u3053\u306F\u304F"
+      sentence: "\u305D\u308C\u3058\u3083\u3041\u3001\u59CB\u3081\u308B\u308F\u3088\uFF01"
   - name: Stage_1
     list: []

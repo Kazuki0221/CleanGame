@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 3768209381098634926}
   - component: {fileID: 3768209381098634921}
   m_Layer: 5
-  m_Name: Chara2
+  m_Name: Chara1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 3768209382343144841}
   - component: {fileID: 3768209382343144840}
   m_Layer: 5
-  m_Name: Chara1
+  m_Name: Chara2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

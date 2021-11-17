@@ -430,11 +430,12 @@ MonoBehaviour:
   charaname: {fileID: 22831833}
   sentence: {fileID: 708517737}
   charaImg:
-  - {fileID: 248454514}
   - {fileID: 2025444947}
+  - {fileID: 248454514}
   chara:
   - {fileID: 21300000, guid: 0ccabe5cb0915014ab0e1d1332fe810c, type: 3}
   - {fileID: 21300000, guid: 6464fdfee524cb942af191e1d066e297, type: 3}
+  - {fileID: 21300000, guid: 0654c8877c653df4eb6aa5b39bf8279d, type: 3}
 --- !u!4 &1372676853
 Transform:
   m_ObjectHideFlags: 0

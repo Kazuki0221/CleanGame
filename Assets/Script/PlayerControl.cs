@@ -22,6 +22,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         int haveCount = 0;//アイテム所持数
 
         public string itemName = null;//アイテム名
+
+        GameManager gameManager;
         GameController gameController;
 
         CSlotGrid cSlotGrid;
@@ -41,10 +43,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
 
             // get the third person character ( this should never be null due to require component )
+            gameManager = FindObjectOfType<GameManager>();
             m_Character = GetComponent<PlayerCharacter>();
-            cSlotGrid = GameObject.Find("SlotGrid").GetComponent<CSlotGrid>();
-            itemSelect = GameObject.Find("SelectArea").GetComponent<ItemSelect>();
-            gameController = GameObject.Find("GameController").GetComponent<GameController>();
+            if (gameManager.mode == GameMode.Game)
+            {
+                cSlotGrid = GameObject.Find("SlotGrid").GetComponent<CSlotGrid>();
+                itemSelect = GameObject.Find("SelectArea").GetComponent<ItemSelect>();
+                gameController = GameObject.Find("GameController").GetComponent<GameController>();
+            }
         }
 
 
@@ -60,14 +66,23 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         // Fixed update is called in sync with physics
         private void FixedUpdate()
         {
-            if (gameController.CountDown() <= 0)
+            if (gameManager.mode == GameMode.Adventure)
             {
-                // read inputs
                 h = CrossPlatformInputManager.GetAxis("Horizontal");
                 v = CrossPlatformInputManager.GetAxis("Vertical");
                 crouch = Input.GetKey(KeyCode.C);
-                m_catch = Input.GetButton("Fire1");
-                m_release = Input.GetButton("Fire2");
+            }
+            else if (gameManager.mode == GameMode.Game)
+            {
+                if (gameController.CountDown() <= 0)
+                {
+                    // read inputs
+                    h = CrossPlatformInputManager.GetAxis("Horizontal");
+                    v = CrossPlatformInputManager.GetAxis("Vertical");
+                    crouch = Input.GetKey(KeyCode.C);
+                    m_catch = Input.GetButton("Fire1");
+                    m_release = Input.GetButton("Fire2");
+                }
             }
 
             // calculate move direction to pass to character
@@ -90,7 +105,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 #endif
 
             // pass all parameters to the character control script
-            m_Character.Move(m_Move, crouch, m_Jump, m_catch, m_release);
+            if(gameManager.mode == GameMode.Adventure) m_Character.Move(m_Move, crouch, m_Jump);
+            else if(gameManager.mode == GameMode.Game) m_Character.Move(m_Move, crouch, m_Jump, m_catch, m_release);
             m_Jump = false;
         }
 

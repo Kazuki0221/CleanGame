@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public enum GameMode
+{
+    Adventure,
+    Game,
+}
 public class GameManager : MonoBehaviour
 {
     private AsyncOperation async;
@@ -11,6 +16,11 @@ public class GameManager : MonoBehaviour
     Slider slider;
 
     StageSelectManager sManager;
+
+    bool startScene = true;
+
+    public GameMode mode;
+    
     /// <summary>
     /// SceneLoad(num)関数内訳
     /// 0→タイトルシーン、1→キャラ選択シーン
@@ -25,14 +35,28 @@ public class GameManager : MonoBehaviour
             LoadingUI = GameObject.Find("Loading");
             slider = FindObjectOfType<Slider>();
             LoadingUI.SetActive(false);
+            //startScene = false;
         }
+
 
 
         if (Input.GetKey(KeyCode.Return) || Input.GetButton("Fire1")) 
         {
             if (SceneManager.GetActiveScene().name == "Title")//タイトルシーン
             {
-                StartCoroutine(SceneLoad(1));
+                TitleManager titleManager = FindObjectOfType<TitleManager>();
+
+                if (titleManager.modeTrigger == 0)
+                {
+                    mode = GameMode.Adventure;
+                    SceneManager.LoadScene("Map1");
+                }
+                else if (titleManager.modeTrigger == 1)
+                {
+                    mode = GameMode.Game;
+                    StartCoroutine(SceneLoad(1));
+                }
+
             }
             else if(SceneManager.GetActiveScene().name == "CharacterSelect")//キャラ選択シーン
             {
@@ -117,7 +141,7 @@ public class GameManager : MonoBehaviour
             slider.value = progressVal;
             yield return null;
         }
+        //startScene = true;
     }
 
-   
 }

@@ -16,7 +16,7 @@ public class SentenceManager : MonoBehaviour
     [SerializeField] Text sentence;
     [SerializeField] Image[] charaImg = new Image[2];
     [SerializeField] List<Sprite> chara = new List<Sprite>();
-    int[] temp = {0, 0};
+    int[] temp = {0, 1};
 
     Color isTalk = Color.white;
     Color noTalk = Color.grey;
@@ -46,14 +46,14 @@ public class SentenceManager : MonoBehaviour
                 ChangeChara(1);
 
             }
-            else if (temp[1] != es.sheets[0].list[num].id)
-            {
-                ChangeChara(1);
-
-            }
             else if (temp[0] != es.sheets[0].list[num].id)
             {
                 ChangeChara(0);
+
+            }
+            else if (temp[1] != es.sheets[0].list[num].id)
+            {
+                ChangeChara(1);
 
             }
             active = false;
