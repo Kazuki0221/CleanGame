@@ -20,7 +20,10 @@ public class GameManager : MonoBehaviour
     bool startScene = true;
 
     public GameMode mode;
-    
+
+    public bool clickFlag;
+
+
     /// <summary>
     /// SceneLoad(num)関数内訳
     /// 0→タイトルシーン、1→キャラ選択シーン
@@ -30,6 +33,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         GameController gController = FindObjectOfType<GameController>();
+        //ロードUI
         if (GameObject.Find("Loading"))
         {
             LoadingUI = GameObject.Find("Loading");
@@ -38,9 +42,8 @@ public class GameManager : MonoBehaviour
             //startScene = false;
         }
 
-
-
-        if (Input.GetKey(KeyCode.Return) || Input.GetButton("Fire1")) 
+        //ボタンをクリックした際実行
+        if (clickFlag) 
         {
             if (SceneManager.GetActiveScene().name == "Title")//タイトルシーン
             {
@@ -49,7 +52,7 @@ public class GameManager : MonoBehaviour
                 if (titleManager.modeTrigger == 0)
                 {
                     mode = GameMode.Adventure;
-                    SceneManager.LoadScene("Map1");
+                    SceneManager.LoadScene("House");
                 }
                 else if (titleManager.modeTrigger == 1)
                 {
@@ -101,6 +104,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    //シーン遷移先
     IEnumerator SceneLoad(int trigger)
     {
         if(trigger == 0)
@@ -142,6 +146,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         //startScene = true;
+        clickFlag = false;
     }
 
 }

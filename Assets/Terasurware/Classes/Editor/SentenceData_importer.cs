@@ -10,7 +10,7 @@ using NPOI.SS.UserModel;
 public class SentenceData_importer : AssetPostprocessor {
 	private static readonly string filePath = "Assets/SentenceData.xlsx";
 	private static readonly string exportPath = "Assets/Resources/SentenceData.asset";
-	private static readonly string[] sheetNames = { "Tutorial","Stage_1", };
+	private static readonly string[] sheetNames = { "Story","NPC", };
 	
 	static void OnPostprocessAllAssets (string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
 	{
@@ -50,9 +50,10 @@ public class SentenceData_importer : AssetPostprocessor {
 						
 						Entity_Sheets.Param p = new Entity_Sheets.Param ();
 						
-					cell = row.GetCell(0); p.id = (int)(cell == null ? 0 : cell.NumericCellValue);
-					cell = row.GetCell(1); p.name = (cell == null ? "" : cell.StringCellValue);
-					cell = row.GetCell(2); p.sentence = (cell == null ? "" : cell.StringCellValue);
+					cell = row.GetCell(0); p.storyID = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(1); p.charaID = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(2); p.name = (cell == null ? "" : cell.StringCellValue);
+					cell = row.GetCell(3); p.sentence = (cell == null ? "" : cell.StringCellValue);
 						s.list.Add (p);
 					}
 					data.sheets.Add(s);

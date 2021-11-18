@@ -105,7 +105,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 #endif
 
             // pass all parameters to the character control script
-            if(gameManager.mode == GameMode.Adventure) m_Character.Move(m_Move, crouch, m_Jump);
+            if(gameManager.mode == GameMode.Adventure) m_Character.Move(m_Move);
             else if(gameManager.mode == GameMode.Game) m_Character.Move(m_Move, crouch, m_Jump, m_catch, m_release);
             m_Jump = false;
         }

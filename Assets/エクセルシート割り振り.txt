@@ -1,0 +1,5 @@
+0　→　Tutorial
+1　→　Story1;
+2
+3
+4 →　NPC

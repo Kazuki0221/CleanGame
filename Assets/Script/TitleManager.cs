@@ -2,35 +2,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
 {
-    [SerializeField] List<Image> mode = new List<Image>();
+    [SerializeField] List<GameObject> mode = new List<GameObject>();
     int num = 0;
     float delayInput;
     public int modeTrigger = 0;
 
     //UI
-    //[SerializeField] Text start_text;
-    //bool flashTrigger = true;
-    //Color c;
-    //float alpha;
+    [SerializeField] Text start_text;
+    bool flashTrigger = true;
+    Color c;
+    float alpha;
 
-    //public bool trigger = false;
+    public bool trigger = false;
 
     //Audio
     AudioSource source;
     [SerializeField] AudioClip sound;
-    [SerializeField] AudioClip start; 
+    [SerializeField] AudioClip start;
+
     void Start()
     {
         source = GetComponent<AudioSource>();
-        //transform.position = Mode[num].position;
 
-    //    c = start_text.color;
-    //    alpha = 1;
-    //
+        c = start_text.color;
+        alpha = 1;
     }
 
     void Update()
@@ -42,14 +42,14 @@ public class TitleManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Fire1"))
         {
-            //if (!trigger)
-            //{              
-            //    start_text.gameObject.SetActive(false);
-            //    mode.ForEach(img => img.gameObject.SetActive(true));
-            //    trigger = true;
-            //}
-            //if(trigger) 
-            source.PlayOneShot(start);
+            if (!trigger)
+            {
+                start_text.gameObject.SetActive(false);
+                mode.ForEach(go => go.SetActive(true));
+                trigger = true;
+            }
+            //if (trigger)
+            //    source.PlayOneShot(start);
         }
 
 
@@ -70,24 +70,26 @@ public class TitleManager : MonoBehaviour
             //Sound(0);
             delayInput += 0.2f;
         }
-        transform.position = mode[num].transform.position;
+        EventSystem.current.SetSelectedGameObject(mode[num]);
+        mode[num].GetComponent<Button>().OnSelect(null);
 
         if (num == 0)
         {
-            mode[0].color = Color.cyan;
-            mode[1].color = Color.white;
+            mode[0].GetComponent<Image>().color = Color.cyan;
+            mode[1].GetComponent<Image>().color = Color.white;
             modeTrigger = 0;
+
         }
         else if (num == 1)
         {
-            mode[1].color = Color.cyan;
-            mode[0].color = Color.white;
+            mode[1].GetComponent<Image>().color = Color.cyan;
+            mode[0].GetComponent<Image>().color = Color.white;
             modeTrigger = 1;
         }
 
 
         //UI
-        /*
+        
         if (!trigger)
         {
             start_text.color = new Color(c.r, c.g, c.b, alpha);
@@ -112,6 +114,11 @@ public class TitleManager : MonoBehaviour
                 flashTrigger = false;
             }
         }
-        */
+        
+    }
+
+    public void OnClick()
+    {
+        FindObjectOfType<GameManager>().clickFlag = true ;
     }
 }

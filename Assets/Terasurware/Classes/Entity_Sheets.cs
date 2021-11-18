@@ -17,7 +17,8 @@ public class Entity_Sheets : ScriptableObject
 	public class Param
 	{
 		
-		public int id;
+		public int storyID;
+		public int charaID;
 		public string name;
 		public string sentence;
 	}

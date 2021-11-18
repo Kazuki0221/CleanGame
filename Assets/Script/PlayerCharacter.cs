@@ -83,7 +83,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 
 		//アドベンチャーモード
-		public void Move(Vector3 move, bool crouch, bool jump)
+		public void Move(Vector3 move)
 		{
 
 			// convert the world relative moveInput vector into a local-relative
@@ -99,16 +99,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			ApplyExtraTurnRotation();
 
 			// control and velocity handling is different when grounded and airborne:
-			if (m_IsGrounded)
-			{
-				HandleGroundedMovement(crouch, jump);
-			}
-			else
-			{
-				HandleAirborneMovement();
-			}
+						
 
-			ScaleCapsuleForCrouching(crouch);
 			PreventStandingInLowHeadroom();
 
 			// send input and other state parameters to the animator
