@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 3768209382028440506}
   - component: {fileID: 3768209382028440517}
   - component: {fileID: 3768209382028440516}
+  - component: {fileID: 162848804}
   m_Layer: 5
   m_Name: TalkCanvas
   m_TagString: Untagged
@@ -403,6 +404,28 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &162848804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3768209382028440519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd78bc7470b2b66449cb99545fd0f816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sheetsID: 0
+  charaname: {fileID: 3768209382283151907}
+  sentence: {fileID: 3768209381862111123}
+  charaImg:
+  - {fileID: 3768209381098634921}
+  - {fileID: 3768209382343144840}
+  chara:
+  - {fileID: 21300000, guid: 0ccabe5cb0915014ab0e1d1332fe810c, type: 3}
+  - {fileID: 21300000, guid: 6464fdfee524cb942af191e1d066e297, type: 3}
+  - {fileID: 21300000, guid: 0654c8877c653df4eb6aa5b39bf8279d, type: 3}
 --- !u!1 &3768209382283151917
 GameObject:
   m_ObjectHideFlags: 0

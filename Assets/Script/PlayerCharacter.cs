@@ -98,12 +98,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 			ApplyExtraTurnRotation();
 
-			// control and velocity handling is different when grounded and airborne:
-						
-
-			PreventStandingInLowHeadroom();
-
-			// send input and other state parameters to the animator
 			UpdateAnimator(move);
 		}
 

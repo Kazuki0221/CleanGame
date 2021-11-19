@@ -8,6 +8,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     [RequireComponent(typeof(PlayerCharacter))]
     public class PlayerControl : MonoBehaviour
     {
+        public enum State
+        {
+            Normal,
+            Talk
+        }
+        State state;
+
+        [SerializeField] GameObject TalkArea;
+
         private PlayerCharacter m_Character; // A reference to the ThirdPersonCharacter on the object
         private Transform m_Cam;                  // A reference to the main camera in the scenes transform
         private Vector3 m_CamForward;             // The current forward direction of the camera
@@ -45,11 +54,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             // get the third person character ( this should never be null due to require component )
             gameManager = FindObjectOfType<GameManager>();
             m_Character = GetComponent<PlayerCharacter>();
-            if (gameManager.mode == GameMode.Game)
+
+            if (gameManager.mode == GameMode.Adventure)
+            {
+                state = State.Normal;
+                if(TalkArea != null)TalkArea.SetActive(true);
+            }
+            else if (gameManager.mode == GameMode.Game)
             {
                 cSlotGrid = GameObject.Find("SlotGrid").GetComponent<CSlotGrid>();
                 itemSelect = GameObject.Find("SelectArea").GetComponent<ItemSelect>();
                 gameController = GameObject.Find("GameController").GetComponent<GameController>();
+                if (TalkArea != null) TalkArea.SetActive(false);
             }
         }
 
@@ -66,7 +82,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         // Fixed update is called in sync with physics
         private void FixedUpdate()
         {
-            if (gameManager.mode == GameMode.Adventure)
+            if (gameManager.mode == GameMode.Adventure && state == State.Normal)
             {
                 h = CrossPlatformInputManager.GetAxis("Horizontal");
                 v = CrossPlatformInputManager.GetAxis("Vertical");
@@ -155,6 +171,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             return m_release;
         }
+
 
     }
 }
