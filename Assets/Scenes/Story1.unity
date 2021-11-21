@@ -422,11 +422,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372676851}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd78bc7470b2b66449cb99545fd0f816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneState: 0
   charaname: {fileID: 22831833}
   sentence: {fileID: 708517737}
   charaImg:
@@ -469,6 +470,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 162848804, guid: e57702b060ab1b041ba0a37e2275e98b, type: 3}
+      propertyPath: sceneState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3768209382028440507, guid: e57702b060ab1b041ba0a37e2275e98b,
         type: 3}
       propertyPath: m_Pivot.x

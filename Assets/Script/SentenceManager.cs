@@ -109,14 +109,9 @@ public class SentenceManager : MonoBehaviour
             ChangeChara(1);
 
         }
-        else if (temp[0] != es.sheets[sID].list[num].charaID)
+        else 
         {
             ChangeChara(0);
-
-        }
-        else if (temp[1] != es.sheets[sID].list[num].charaID)
-        {
-            ChangeChara(1);
 
         }
         
@@ -137,8 +132,9 @@ public class SentenceManager : MonoBehaviour
         }
 
         charaImg[n].color = isTalk;
-        charaImg[n].sprite = chara[temp[n]];
         temp[n] = es.sheets[sheetsID].list[num].charaID;
+
+        charaImg[n].sprite = chara[temp[n]];
 
     }
 

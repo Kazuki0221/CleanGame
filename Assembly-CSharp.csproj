@@ -141,6 +141,7 @@
     <Compile Include="Assets\Asset\UnityChan\UnityChan.SpringBone\Script\Utility\StringUtil.cs" />
     <Compile Include="Assets\Asset\UnityChan\UnityChan.SpringBone\Script\Utility\TextRecordParsing.cs" />
     <Compile Include="Assets\Script\Converstation.cs" />
+    <Compile Include="Assets\Script\DoorController.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\GameScene\Bin.cs" />
     <Compile Include="Assets\Script\GameScene\CItem.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Assets\Script\GameScene\ItemSelect.cs" />
     <Compile Include="Assets\Script\GameScene\NewsPaper.cs" />
     <Compile Include="Assets\Script\GameScene\PetBottle.cs" />
+    <Compile Include="Assets\Script\HouseManager.cs" />
     <Compile Include="Assets\Script\MapMoveManager.cs" />
     <Compile Include="Assets\Script\MiniMapCamera.cs" />
     <Compile Include="Assets\Script\OutMap.cs" />

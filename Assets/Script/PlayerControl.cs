@@ -63,12 +63,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 GameObject spownPoint = GameObject.FindGameObjectWithTag("SpownPoint");
                 if (spownPoint)
                 {
-                    GameObject freeLookCamera = GameObject.FindGameObjectWithTag("Camera");
+                    GameObject cameraRig = GameObject.FindGameObjectWithTag("Camera");
 
                     transform.position = spownPoint.transform.position;
                     transform.rotation = spownPoint.transform.rotation;
-                    freeLookCamera.transform.position = spownPoint.transform.position;
-                    freeLookCamera.transform.rotation = spownPoint.transform.rotation;
+                    cameraRig.transform.position = spownPoint.transform.position;
+                    cameraRig.transform.rotation = spownPoint.transform.rotation;
 
                 }
             }
