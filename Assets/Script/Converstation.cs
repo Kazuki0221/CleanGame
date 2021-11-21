@@ -9,7 +9,7 @@ public class Converstation : MonoBehaviour
 
     bool isTalk = false;
     bool trigger = false;
-    // Start is called before the first frame update
+
     void Start()
     {
         if (FindObjectOfType<SentenceManager>())
@@ -19,11 +19,14 @@ public class Converstation : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (trigger) sentenceUI.SetActive(true);
-        else sentenceUI.SetActive(false);
+        if (GetTrigger() ) sentenceUI.SetActive(true);
+        else 
+        {
+            sentenceUI.SetActive(false);
+            isTalk = false;
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -33,15 +36,26 @@ public class Converstation : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 sentenceManager.SetState(SceneState.NPC);
-                Debug.Log(sentenceManager.GetState().ToString());
                 isTalk = true;
-                trigger = true;
+                SetTrigger(true);
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "NPC")
+        {
+            sentenceManager.SetState(SceneState.Active);
         }
     }
 
     public void SetTrigger(bool t)
     {
         this.trigger = t;
+    }
+    bool GetTrigger()
+    {
+        return trigger;
     }
 }

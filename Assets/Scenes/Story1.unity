@@ -427,7 +427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd78bc7470b2b66449cb99545fd0f816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sheetsID: 0
   charaname: {fileID: 22831833}
   sentence: {fileID: 708517737}
   charaImg:

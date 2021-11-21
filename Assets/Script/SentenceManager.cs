@@ -8,13 +8,16 @@ using UnityEngine.UI;
 
 public enum SceneState
 {
+    Active,
     Story,
     NPC
 }
 public class SentenceManager : MonoBehaviour
 {
     
-    SceneState sceneState;
+    [SerializeField]SceneState sceneState;
+
+    bool firstEnable = true;
 
     Entity_Sheets es;//エクセルデータ
     int num = 0;    //会話順
@@ -30,90 +33,96 @@ public class SentenceManager : MonoBehaviour
     Color isTalk = Color.white; //話している人の表示
     Color noTalk = Color.grey;  //話していない人の表示
 
-    //Converstation converstation;
+    Converstation converstation;
 
     //Activeになった時実行
     void OnEnable()
     {
-        es = Resources.Load("SentenceData") as Entity_Sheets;
-        //converstation = FindObjectOfType<Converstation>();
-        sceneState = GetState();
-        if (sceneState == SceneState.Story) sheetsID = 0;
-        else if (sceneState == SceneState.NPC) sheetsID = 1;
-        //charaImg[0].sprite = chara[es.sheets[0].list[0].charaID];
-        charaImg[0].color = new Color(0, 0, 0, 0);
-        charaImg[1].color = new Color(0, 0, 0, 0);
-        num = 0;
-        temp[0] = es.sheets[sheetsID].list[0].charaID;
+        if (sceneState == SceneState.Story) firstEnable = false;
 
-        for(int i = 0; i < es.sheets[sheetsID].list.Count; i++)
+        if (!firstEnable)
         {
-            if(temp[1] != temp[0])
+            es = Resources.Load("SentenceData") as Entity_Sheets;
+            if (FindObjectOfType<Converstation>()) converstation = FindObjectOfType<Converstation>();
+            sceneState = GetState();
+            if (sceneState == SceneState.Story) sheetsID = 0;
+            else if (sceneState == SceneState.NPC) sheetsID = 1;
+
+            InitData();//データ初期化
+
+            temp[0] = es.sheets[sheetsID].list[0].charaID;
+            charaImg[0].sprite = chara[temp[0]];
+
+            for (int i = 0; i < es.sheets[sheetsID].list.Count; i++)
             {
-                temp[1] = es.sheets[sheetsID].list[i].charaID;
-                Debug.Log(temp[1]);
-                break;
+                if (es.sheets[sheetsID].list[i].charaID != temp[0])
+                {
+                    temp[1] = es.sheets[sheetsID].list[i].charaID;
+                    charaImg[1].sprite = chara[temp[1]];
+                    break;
+                }
+
             }
         }
-        
+        else firstEnable = false;
     }
 
     //非Activeになった時実行
-    //private void OnDisable()
-    //{
-    //    num = 0;
-    //}
+    private void OnDisable()
+    {
+        InitData();
+    }
 
     void Update()
     {
+
         //会話進行処理
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (num < es.sheets[0].list.Count - 1)
+
+            if (num < es.sheets[sheetsID].list.Count - 1)
             {
                 num++;
                 active = true;
             }
             else
             {
-                //converstation.SetTrigger(false);
-                this.gameObject.SetActive(false);
+                if (converstation) converstation.SetTrigger(false);
             }
-        }
 
-        StorySheet(sheetsID);
-        
+        }
+        if(active) StorySheet(sheetsID);
+
+
     }
 
     //ストーリーシート
     void StorySheet(int sID)
     {
-        if (active)
+
+        if (temp[0] == es.sheets[sID].list[num].charaID )
         {
-            if (temp[0] == es.sheets[sID].list[num].charaID)
-            {
-                ChangeChara(0);
-            }
-            else if (temp[1] == es.sheets[sID].list[num].charaID)
-            {
-                ChangeChara(1);
-
-            }
-            else if (temp[0] != es.sheets[sID].list[num].charaID)
-            {
-                ChangeChara(0);
-
-            }
-            else if (temp[1] != es.sheets[sID].list[num].charaID)
-            {
-                ChangeChara(1);
-
-            }
-            active = false;
+            ChangeChara(0);
         }
+        else if (temp[1] == es.sheets[sID].list[num].charaID)
+        {
+            ChangeChara(1);
 
+        }
+        else if (temp[0] != es.sheets[sID].list[num].charaID)
+        {
+            ChangeChara(0);
+
+        }
+        else if (temp[1] != es.sheets[sID].list[num].charaID)
+        {
+            ChangeChara(1);
+
+        }
+        
         charaname.text = es.sheets[sID].list[num].name;
         sentence.text = es.sheets[sID].list[num].sentence;
+        active = false;
     }
     //キャラ切り替え関数
     void ChangeChara(int n)
@@ -128,8 +137,8 @@ public class SentenceManager : MonoBehaviour
         }
 
         charaImg[n].color = isTalk;
-        charaImg[n].sprite = chara[es.sheets[0].list[num].charaID];
-        temp[n] = es.sheets[0].list[num].charaID;
+        charaImg[n].sprite = chara[temp[n]];
+        temp[n] = es.sheets[sheetsID].list[num].charaID;
 
     }
 
@@ -143,4 +152,14 @@ public class SentenceManager : MonoBehaviour
         return sceneState;
     }
 
+    //初期化関数
+    private void InitData()
+    {
+        active = true;
+        num = 0;
+        temp[0] = 0;
+        temp[0] = 0;
+        charaImg[0].color = new Color(0, 0, 0, 0);
+        charaImg[1].color = new Color(0, 0, 0, 0);
+    }
 }

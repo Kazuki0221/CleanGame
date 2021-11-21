@@ -8,6 +8,11 @@ TagManager:
   - Stage
   - Gomibako
   - NPC
+  - SpownPoint
+  - HouseArea
+  - OutArea
+  - MapOutArea
+  - Camera
   layers:
   - Default
   - TransparentFX

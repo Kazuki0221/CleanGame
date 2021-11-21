@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     StageSelectManager sManager;
 
-    bool startScene = true;
+    //bool startScene = true;
 
     public GameMode mode;
 
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
                 if (titleManager.modeTrigger == 0)
                 {
                     mode = GameMode.Adventure;
-                    SceneManager.LoadScene("House");
+                    SceneManager.LoadScene("City");
                 }
                 else if (titleManager.modeTrigger == 1)
                 {

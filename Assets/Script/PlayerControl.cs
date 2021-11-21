@@ -54,11 +54,23 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             // get the third person character ( this should never be null due to require component )
             gameManager = FindObjectOfType<GameManager>();
             m_Character = GetComponent<PlayerCharacter>();
+            
 
             if (gameManager.mode == GameMode.Adventure)
             {
                 state = State.Normal;
                 if(TalkArea != null)TalkArea.SetActive(true);
+                GameObject spownPoint = GameObject.FindGameObjectWithTag("SpownPoint");
+                if (spownPoint)
+                {
+                    GameObject freeLookCamera = GameObject.FindGameObjectWithTag("Camera");
+
+                    transform.position = spownPoint.transform.position;
+                    transform.rotation = spownPoint.transform.rotation;
+                    freeLookCamera.transform.position = spownPoint.transform.position;
+                    freeLookCamera.transform.rotation = spownPoint.transform.rotation;
+
+                }
             }
             else if (gameManager.mode == GameMode.Game)
             {
