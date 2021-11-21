@@ -31,6 +31,7 @@ public class TitleManager : MonoBehaviour
 
         c = start_text.color;
         alpha = 1;
+
     }
 
     void Update()

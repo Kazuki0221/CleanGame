@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
             else if (SceneManager.GetActiveScene().name == "ResultScene")//リザルトシーン
             {
                 ResultManager resultManager = FindObjectOfType<ResultManager>();
-                StartCoroutine(SceneLoad(resultManager.PushTrigger()));
+                StartCoroutine(SceneLoad(resultManager.triggerNum));
             }
         }
 

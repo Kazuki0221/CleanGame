@@ -16,11 +16,15 @@ public class StageSelectManager : MonoBehaviour
     AudioSource source;
     [SerializeField] AudioClip []sound;
 
+    GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         image.sprite = stages[0];
         source = GetComponent<AudioSource>();
+
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -53,6 +57,8 @@ public class StageSelectManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetButton("Fire1"))
         {
             Sound(1);
+            gameManager.clickFlag = true;
+
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))

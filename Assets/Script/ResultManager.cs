@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityStandardAssets.CrossPlatformInput;
 using DG.Tweening;
 
 public class ResultManager : MonoBehaviour
 {
+    [SerializeField]List<GameObject> btn = new List<GameObject>();
     int highScore;
     [SerializeField] Text result_text;
-    [SerializeField] GameObject[] images;
+    //[SerializeField] GameObject[] images;
     [Range(0, 2)]
     int num;
     float delayInput;
+    public int triggerNum = 0;
 
     AudioSource source;
     [SerializeField]AudioClip[] sound;
+
 
     void Start()
     {
@@ -23,8 +27,9 @@ public class ResultManager : MonoBehaviour
         //result_text.DOCounter(0, highScore);
         result_text.text = highScore.ToString();
 
-        this.transform.position = images[0].transform.position;
+        //this.transform.position = images[0].transform.position;
         source = GetComponent<AudioSource>();
+
     }
 
     void Update()
@@ -40,18 +45,32 @@ public class ResultManager : MonoBehaviour
         if (h > 0)
         {
             num++;
-            if (num > 2) num = 0;
-            this.transform.position = images[num].transform.position;
+            if (num > btn.Count - 1) num = 0;
+            //this.transform.position = images[num].transform.position;
             Sound(0);
             delayInput += 0.2f;
         }
         else if (h < 0)
         {
             num--;
-            if (num < 0) num = 0;
-            this.transform.position = images[num].transform.position;
+            if (num < 0) num = btn.Count - 1;
+            //this.transform.position = images[num].transform.position;
             Sound(0);
             delayInput += 0.2f;
+        }
+        EventSystem.current.SetSelectedGameObject(btn[num]);
+        btn[num].GetComponent<Button>().OnSelect(null);
+
+        for(int i = 0; i < btn.Count; i++)
+        {
+            if(i != num)
+            {
+                btn[i].GetComponent<Image>().color = Color.white;
+            }
+            else
+            {
+                btn[i].GetComponent<Image>().color = Color.cyan;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetButton("Fire1"))
@@ -59,11 +78,6 @@ public class ResultManager : MonoBehaviour
             GameController.m_score = 0;
             Sound(1);
         }
-    }
-
-    public int PushTrigger()
-    {
-        return num;
     }
 
     void Sound(int trigger)
@@ -76,5 +90,25 @@ public class ResultManager : MonoBehaviour
         {
             source.PlayOneShot(sound[trigger]);
         }
+    }
+
+    public void ToTitle()
+    {
+        triggerNum = 0;
+        FindObjectOfType<GameManager>().clickFlag = true;
+    }
+
+    public void ToCharaSelect()
+    {
+        triggerNum = 1;
+        FindObjectOfType<GameManager>().clickFlag = true;
+
+    }
+
+    public void ToStageSelect()
+    {
+        triggerNum = 2;
+        FindObjectOfType<GameManager>().clickFlag = true;
+
     }
 }

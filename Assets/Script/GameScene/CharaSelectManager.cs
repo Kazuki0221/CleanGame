@@ -23,6 +23,8 @@ public class CharaSelectManager : MonoBehaviour
     AudioSource source;
     [SerializeField] AudioClip []sound;
 
+    GameManager gameManager;
+
     void Start()
     {
         areaPos = character[0].transform.position;
@@ -30,6 +32,8 @@ public class CharaSelectManager : MonoBehaviour
         this.transform.position = areaPos;
         source = GetComponent<AudioSource>();
         trigger = false;
+
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -74,6 +78,7 @@ public class CharaSelectManager : MonoBehaviour
             source.PlayOneShot(charaData[num].voice);
             chara = charaData[num];
             trigger = true;
+            gameManager.clickFlag = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
