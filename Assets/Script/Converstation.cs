@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class Converstation : MonoBehaviour
 {
     [SerializeField] GameObject sentenceUI; //SentenceManagerオブジェクト
     SentenceManager sentenceManager;
+    PlayerControl player;
 
     bool isTalk = false;
     bool trigger = false;
@@ -17,15 +19,21 @@ public class Converstation : MonoBehaviour
             sentenceManager = sentenceUI.GetComponent<SentenceManager>();
             sentenceUI.SetActive(false);
         }
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
     }
 
     void Update()
     {
-        if (GetTrigger() ) sentenceUI.SetActive(true);
-        else 
+        if (GetTrigger())
+        {
+            sentenceUI.SetActive(true);
+            player.SetState(PlayerControl.State.Talk);
+        }
+        else
         {
             sentenceUI.SetActive(false);
             isTalk = false;
+            player.SetState(PlayerControl.State.Normal);
         }
     }
 

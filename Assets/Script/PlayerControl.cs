@@ -113,6 +113,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 }
             }
 
+            if(state == State.Talk)
+            {
+                h = 0;
+                v = 0;
+            }
+
             // calculate move direction to pass to character
             if (m_Cam != null)
             {
@@ -171,6 +177,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     }
                 }
             }
+        }
+
+        public void SetState(State state)
+        {
+            this.state = state;
+        }
+
+        State GetState()
+        {
+            return state;
         }
 
        

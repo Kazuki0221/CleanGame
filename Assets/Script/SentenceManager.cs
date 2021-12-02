@@ -17,7 +17,7 @@ public class SentenceManager : MonoBehaviour
     
     [SerializeField]SceneState sceneState;
 
-    bool firstEnable = true;
+    //bool firstEnable = true;
 
     Entity_Sheets es;//エクセルデータ
     int num = 0;    //会話順
@@ -38,33 +38,34 @@ public class SentenceManager : MonoBehaviour
     //Activeになった時実行
     void OnEnable()
     {
-        if (sceneState == SceneState.Story) firstEnable = false;
+        //if (sceneState == SceneState.Story) firstEnable = false;
 
-        if (!firstEnable)
+        //if (!firstEnable)
+        //{
+
+        //}
+        //else firstEnable = false;
+        es = Resources.Load("SentenceData") as Entity_Sheets;
+        if (FindObjectOfType<Converstation>()) converstation = FindObjectOfType<Converstation>();
+        sceneState = GetState();
+        if (sceneState == SceneState.Story) sheetsID = 0;
+        else if (sceneState == SceneState.NPC) sheetsID = 1;
+
+        InitData();//データ初期化
+
+        temp[0] = es.sheets[sheetsID].list[0].charaID;
+        charaImg[0].sprite = chara[temp[0]];
+
+        for (int i = 0; i < es.sheets[sheetsID].list.Count; i++)
         {
-            es = Resources.Load("SentenceData") as Entity_Sheets;
-            if (FindObjectOfType<Converstation>()) converstation = FindObjectOfType<Converstation>();
-            sceneState = GetState();
-            if (sceneState == SceneState.Story) sheetsID = 0;
-            else if (sceneState == SceneState.NPC) sheetsID = 1;
-
-            InitData();//データ初期化
-
-            temp[0] = es.sheets[sheetsID].list[0].charaID;
-            charaImg[0].sprite = chara[temp[0]];
-
-            for (int i = 0; i < es.sheets[sheetsID].list.Count; i++)
+            if (es.sheets[sheetsID].list[i].charaID != temp[0])
             {
-                if (es.sheets[sheetsID].list[i].charaID != temp[0])
-                {
-                    temp[1] = es.sheets[sheetsID].list[i].charaID;
-                    charaImg[1].sprite = chara[temp[1]];
-                    break;
-                }
-
+                temp[1] = es.sheets[sheetsID].list[i].charaID;
+                charaImg[1].sprite = chara[temp[1]];
+                break;
             }
+
         }
-        else firstEnable = false;
     }
 
     //非Activeになった時実行
