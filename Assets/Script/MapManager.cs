@@ -10,10 +10,12 @@ using DG.Tweening;
 public class MapManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> places = new List<GameObject>();
-    [SerializeField] List<Image> placesImg = new List<Image>();
+    [SerializeField] List<GameObject> placesImg = new List<GameObject>();
     float delayInput;
     int num = 0;
-  
+    int tempNum;
+
+    
     void Update()
     {
         if(delayInput > 0)
@@ -23,6 +25,7 @@ public class MapManager : MonoBehaviour
         }
 
         var v = Input.GetAxis("Vertical");
+        tempNum = num;
 
         if (v > 0)
         {
@@ -39,11 +42,22 @@ public class MapManager : MonoBehaviour
 
         GameObject tempObj = places[num];
         EventSystem.current.SetSelectedGameObject(places[num]);
-        places[num].GetComponent<Button>().OnSelect(null);
-        placesImg[num].transform.DOScale(new Vector2(1.5f, 1.5f), 1f).OnComplete(() => placesImg[num].transform.DOScale(new Vector2(1,1), 1));
+        places[num].GetComponent<Button>().OnSelect(null);        
 
         places[num].GetComponent<Image>().color = Color.cyan;
         places.Where(go => go != tempObj).ToList().ForEach(go => go.GetComponent<Image>().color = Color.white);
+
+        if(v == 0 )
+        {
+            placesImg[num].GetComponent<Animator>().SetBool("Select", true);
+            //OneShoot = false;
+        }
+        else
+        {
+            placesImg[tempNum].GetComponent<Animator>().SetBool("Select", false);
+            //OneShoot = true;
+        }
+
 
     }
 

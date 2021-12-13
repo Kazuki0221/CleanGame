@@ -189,8 +189,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             return state;
         }
 
-       
-
         public bool Catch()
         {
             return m_catch;
@@ -199,7 +197,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             return m_release;
         }
-
 
     }
 }
