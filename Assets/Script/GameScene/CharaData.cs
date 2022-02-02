@@ -9,6 +9,7 @@ public class CharaData : ScriptableObject
     public string Name;
     public Sprite image;
     public Sprite charaBack;
-    public GameObject character;
+    public GameObject Adventure;
+    public GameObject Game;
     public AudioClip voice;
 }

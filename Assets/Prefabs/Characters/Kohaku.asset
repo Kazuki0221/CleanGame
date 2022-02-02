@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998552826d4c73344ad5ad2bb6ddf529, type: 3}
+  m_Name: Kohaku
+  m_EditorClassIdentifier: 
+  Name: "\u5927\u9CE5\u3053\u306F\u304F"
+  image: {fileID: 21300000, guid: b083501a3613b094cadf8c7be08eb823, type: 3}
+  charaBack: {fileID: 21300000, guid: 83aa8fd88192980448b633174267a375, type: 3}
+  Adventure: {fileID: 8740798971438804063, guid: ce9bb6579962e4b489a4cbf16e989e14,
+    type: 3}
+  Game: {fileID: 4880467264618853143, guid: 7f744f84449d84f47b48ad87b9c00842, type: 3}
+  voice: {fileID: 8300000, guid: d3e747c03527f794f8e193f11ac78877, type: 3}

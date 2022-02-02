@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class CharaSelectManager : MonoBehaviour
 {
-    public static CharaData chara;//メインへ渡すキャラデータ
+    //public static CharaData chara;//メインへ渡すキャラデータ
     [SerializeField] List<GameObject> character = new List<GameObject>();//キャラクター
     [Range(0, 2)]
     int num = 0;
@@ -76,7 +76,8 @@ public class CharaSelectManager : MonoBehaviour
         if ((Input.GetKey(KeyCode.Return)|| Input.GetButton("Fire1"))&& !trigger)
         {
             source.PlayOneShot(charaData[num].voice);
-            chara = charaData[num];
+            //GameManager.chara = charaData[num].character;
+            gameManager.chara = charaData[num];
             trigger = true;
             gameManager.clickFlag = true;
         }

@@ -44,13 +44,16 @@ public class GameController : MonoBehaviour
     bool timeUp;
     int count;
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
+        FindObjectOfType<GameManager>().mode = GameMode.Game;
+
         firstPlayerPos = new Vector3(0, 1, 0);
-        playerPrefs = CharaSelectManager.chara.character;
+
+        //playerPrefs = GameManager.chara;
+        playerPrefs = FindObjectOfType<GameManager>().chara.Game;
+
+
         charaObj = Instantiate(playerPrefs, firstPlayerPos, playerPrefs.transform.rotation);
         charaObj.name = playerPrefs.name;
         AddScore(0);
@@ -60,7 +63,6 @@ public class GameController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 

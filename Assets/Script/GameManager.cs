@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public bool clickFlag;
 
+    public CharaData chara;
+
 
     /// <summary>
     /// SceneLoad(num)関数内訳

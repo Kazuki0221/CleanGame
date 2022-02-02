@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefs: {fileID: 0}
   itemSpownArea: {fileID: 0}
+  defaultChara: {fileID: 11400000, guid: 4f146110991000b4ba6182722f2b95e5, type: 2}
   item:
   - {fileID: 11400000, guid: 859e24d27acb0e742a8562e7dd4c7bdb, type: 2}
   - {fileID: 11400000, guid: 50c84c15656f3c941842f6927fdfecf5, type: 2}
@@ -72,7 +73,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a31dbbbae383e6e4db47d5dcf4bf2d77, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4eb33e95c18b1bf4fb7560115e4a4380, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

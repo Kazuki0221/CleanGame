@@ -37,6 +37,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         CSlotGrid cSlotGrid;
         ItemSelect itemSelect;
+
+        GameObject message;
+        GameObject converstation;
         private void Start()
         {
             // get the transform of the main camera
@@ -54,7 +57,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             // get the third person character ( this should never be null due to require component )
             gameManager = FindObjectOfType<GameManager>();
             m_Character = GetComponent<PlayerCharacter>();
-            
 
             if (gameManager.mode == GameMode.Adventure)
             {
@@ -71,6 +73,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     cameraRig.transform.rotation = spownPoint.transform.rotation;
 
                 }
+                message = GameObject.Find("StageMessage");
+                message.SetActive(false);
+
             }
             else if (gameManager.mode == GameMode.Game)
             {
@@ -94,11 +99,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         // Fixed update is called in sync with physics
         private void FixedUpdate()
         {
-            if (gameManager.mode == GameMode.Adventure && state == State.Normal)
+            if (gameManager.mode == GameMode.Adventure)
             {
-                h = CrossPlatformInputManager.GetAxis("Horizontal");
-                v = CrossPlatformInputManager.GetAxis("Vertical");
-                crouch = Input.GetKey(KeyCode.C);
+                if (state == State.Normal)
+                {
+                    h = CrossPlatformInputManager.GetAxis("Horizontal");
+                    v = CrossPlatformInputManager.GetAxis("Vertical");
+                    crouch = Input.GetKey(KeyCode.C);
+                }
+                else if(state == State.Talk)
+                {
+                    h = 0;
+                    v = 0;
+                }
             }
             else if (gameManager.mode == GameMode.Game)
             {
@@ -111,12 +124,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     m_catch = Input.GetButton("Fire1");
                     m_release = Input.GetButton("Fire2");
                 }
-            }
-
-            if(state == State.Talk)
-            {
-                h = 0;
-                v = 0;
             }
 
             // calculate move direction to pass to character
@@ -146,35 +153,45 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void OnCollisionStay(Collision collision)
         {
-            if (collision.gameObject.tag == "Item")
+            if (gameManager.mode == GameMode.Game)
             {
-                if (haveCount < 3)
+                if (collision.gameObject.tag == "Item")
                 {
-                    if (m_catch)
+                    if (haveCount < 3)
                     {
-                        itemName = collision.gameObject.name;
-                        Destroy(collision.gameObject);
-                        if (itemName != null)
+                        if (m_catch)
                         {
-                            haveCount++;
-                            gameController.itemCount--;
+                            itemName = collision.gameObject.name;
+                            Destroy(collision.gameObject);
+                            if (itemName != null)
+                            {
+                                haveCount++;
+                                gameController.itemCount--;
+                            }
+                        }
+                    }
+                }
+
+                if (collision.gameObject.tag == "Gomibako")
+                {
+                    Vector3 gPos = collision.gameObject.transform.position;
+                    gPos.y += 1.5f;
+                    if (haveCount > 0 && haveCount < 3)
+                    {
+                        if (m_release && cSlotGrid.ReleseItem(itemSelect.num) != null)
+                        {
+                            var obj = Instantiate(cSlotGrid.ReleseItem(itemSelect.num).ItemObj, gPos, cSlotGrid.ReleseItem(itemSelect.num).ItemObj.transform.rotation);
+                            obj.name = cSlotGrid.ReleseItem(itemSelect.num).ItemName;
+                            haveCount--;
                         }
                     }
                 }
             }
-
-            if (collision.gameObject.tag == "Gomibako")
+            else if(gameManager.mode == GameMode.Adventure)
             {
-                Vector3 gPos = collision.gameObject.transform.position;
-                gPos.y += 1.5f;
-                if (haveCount > 0 && haveCount < 3)
+                if(collision.gameObject.name == "GamePoint")
                 {
-                    if (m_release && cSlotGrid.ReleseItem(itemSelect.num) != null)
-                    {
-                        var obj = Instantiate(cSlotGrid.ReleseItem(itemSelect.num).ItemObj, gPos, cSlotGrid.ReleseItem(itemSelect.num).ItemObj.transform.rotation);
-                        obj.name = cSlotGrid.ReleseItem(itemSelect.num).ItemName;
-                        haveCount--;
-                    }
+                    message.SetActive(true);
                 }
             }
         }
