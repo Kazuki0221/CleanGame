@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 
 public class MoveStage : MonoBehaviour
 {
-
     [SerializeField]List<GameObject> button = new List<GameObject>();
     int num = 0;
     float delayInput;
@@ -17,7 +17,12 @@ public class MoveStage : MonoBehaviour
 
     [SerializeField] List<CharaData> CharaDatas = new List<CharaData>();
 
+    GameManager gameManager;
 
+    private void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
     void Update()
     {
@@ -63,12 +68,17 @@ public class MoveStage : MonoBehaviour
     public void ToStage()
     {
         string charaName = GameObject.FindGameObjectWithTag("Player").name.Replace("(Adventure)", "");
-        FindObjectOfType<GameManager>().chara = CharaDatas.Where(c => c.name == charaName).FirstOrDefault();
+        gameManager.chara = CharaDatas.Where(c => c.name == charaName).FirstOrDefault();
+        gameManager.sceneState = GameManager.BeforeSceneState.Adventure;
+        GameManager.sceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(stageName);
     }
 
     public void Back()
     {
-        Debug.Log("Back");
+        PlayerControl player = FindObjectOfType<PlayerControl>();
+        player.message.SetActive(false);
+        player.SetState(State.Normal);
+
     }
 }

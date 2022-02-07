@@ -11,9 +11,7 @@ public enum GameMode
 }
 public class GameManager : MonoBehaviour
 {
-    private AsyncOperation async;
-    GameObject LoadingUI;
-    Slider slider;
+    //GameObject loadingUI;
 
     StageSelectManager sManager;
 
@@ -25,7 +23,19 @@ public class GameManager : MonoBehaviour
 
     public CharaData chara;
 
+    public static string sceneName;
 
+    public enum BeforeSceneState
+    {
+        Adventure,
+        StageSelect,
+    }
+    public BeforeSceneState sceneState;
+
+    private void Start()
+    {
+        Cursor.visible = false;
+    }
     /// <summary>
     /// SceneLoad(num)関数内訳
     /// 0→タイトルシーン、1→キャラ選択シーン
@@ -38,9 +48,9 @@ public class GameManager : MonoBehaviour
         //ロードUI
         if (GameObject.Find("Loading"))
         {
-            LoadingUI = GameObject.Find("Loading");
-            slider = FindObjectOfType<Slider>();
-            LoadingUI.SetActive(false);
+            //LoadingUI = GameObject.Find("Loading");
+            //slider = FindObjectOfType<Slider>();
+            //LoadingUI.SetActive(false);
             //startScene = false;
         }
 
@@ -112,42 +122,35 @@ public class GameManager : MonoBehaviour
         if(trigger == 0)
         {
             yield return new WaitForSeconds(0.2f);
-            LoadingUI.SetActive(true);
-            async = SceneManager.LoadSceneAsync("Title");
+            //LoadingUI.SetActive(true);
+            SceneManager.LoadScene("Title");
         }
         else if(trigger == 1)
         {
             yield return new WaitForSeconds(0.2f);
-            LoadingUI.SetActive(true);
-            async = SceneManager.LoadSceneAsync("CharacterSelect");
+            //LoadingUI.SetActive(true);
+            SceneManager.LoadScene("CharacterSelect");
         }
         else if(trigger == 2)
         {
             yield return new WaitForSeconds(0.5f);
-            LoadingUI.SetActive(true);
-            async = SceneManager.LoadSceneAsync("StageSelect");
+            //LoadingUI.SetActive(true);
+            SceneManager.LoadScene("StageSelect");
         }
         else if(trigger == 3)
         {
             yield return new WaitForSeconds(0.2f);
-            LoadingUI.SetActive(true);
-            async = SceneManager.LoadSceneAsync(sManager.StageName());
+            //LoadingUI.SetActive(true);
+            SceneManager.LoadScene(sManager.StageName());
         }
         else if(trigger == 4)
         {
             yield return new WaitForSeconds(0.2f);
-            LoadingUI.SetActive(true);
+            //LoadingUI.SetActive(true);
 
-            async = SceneManager.LoadSceneAsync("ResultScene");
+            SceneManager.LoadScene("ResultScene");
         }
 
-        while (slider.value < 1)
-        {
-            var progressVal = Mathf.Clamp01(async.progress / 0.9f);
-            slider.value = progressVal;
-            yield return null;
-        }
-        //startScene = true;
         clickFlag = false;
     }
 

@@ -5,15 +5,16 @@ using UnityStandardAssets.CrossPlatformInput;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
+    public enum State
+    {
+        Normal,
+        Talk
+    }
     [RequireComponent(typeof(PlayerCharacter))]
     public class PlayerControl : MonoBehaviour
     {
-        public enum State
-        {
-            Normal,
-            Talk
-        }
-        State state;
+        
+        [SerializeField]State state;
 
         [SerializeField] GameObject TalkArea;
 
@@ -38,7 +39,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         CSlotGrid cSlotGrid;
         ItemSelect itemSelect;
 
-        GameObject message;
+         public GameObject message;
         GameObject converstation;
         private void Start()
         {
@@ -60,22 +61,39 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             if (gameManager.mode == GameMode.Adventure)
             {
-                state = State.Normal;
+                SetState(State.Normal);
                 if(TalkArea != null)TalkArea.SetActive(true);
-                GameObject spownPoint = GameObject.FindGameObjectWithTag("SpownPoint");
-                if (spownPoint)
+                if (GameManager.sceneName != "ResultScene") 
                 {
-                    GameObject cameraRig = GameObject.FindGameObjectWithTag("Camera");
+                    GameObject spownPoint = GameObject.FindGameObjectWithTag("SpownPoint");
+                    if (spownPoint)
+                    {
+                        GameObject cameraRig = GameObject.FindGameObjectWithTag("Camera");
 
-                    transform.position = spownPoint.transform.position;
-                    transform.rotation = spownPoint.transform.rotation;
-                    cameraRig.transform.position = spownPoint.transform.position;
-                    cameraRig.transform.rotation = spownPoint.transform.rotation;
+                        transform.position = spownPoint.transform.position;
+                        transform.rotation = spownPoint.transform.rotation;
+                        cameraRig.transform.position = spownPoint.transform.position;
+                        cameraRig.transform.rotation = spownPoint.transform.rotation;
+                    }
+                }
+                else
+                {
+                    GameObject spownPoint = GameObject.FindGameObjectWithTag("GamePoint");
+                    if (spownPoint)
+                    {
+                        GameObject cameraRig = GameObject.FindGameObjectWithTag("Camera");
 
+                        transform.position = spownPoint.transform.position - new Vector3(2, 0, 2);
+                        transform.rotation = spownPoint.transform.rotation;
+                        cameraRig.transform.position = spownPoint.transform.position - new Vector3(2, 0, 2);
+                        cameraRig.transform.rotation = spownPoint.transform.rotation;
+                    }
                 }
                 message = GameObject.Find("StageMessage");
-                message.SetActive(false);
-
+                if(message)
+                {
+                    message.SetActive(false);
+                }
             }
             else if (gameManager.mode == GameMode.Game)
             {
@@ -101,17 +119,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             if (gameManager.mode == GameMode.Adventure)
             {
-                if (state == State.Normal)
+                if (state == State.Talk)
+                {
+                    h = 0;
+                    v = 0;
+                }
+                else if (state == State.Normal)
                 {
                     h = CrossPlatformInputManager.GetAxis("Horizontal");
                     v = CrossPlatformInputManager.GetAxis("Vertical");
                     crouch = Input.GetKey(KeyCode.C);
                 }
-                else if(state == State.Talk)
-                {
-                    h = 0;
-                    v = 0;
-                }
+                
             }
             else if (gameManager.mode == GameMode.Game)
             {
@@ -187,10 +206,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     }
                 }
             }
-            else if(gameManager.mode == GameMode.Adventure)
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (gameManager.mode == GameMode.Adventure)
             {
-                if(collision.gameObject.name == "GamePoint")
+                if (other.gameObject.name == "MessagePoint")
                 {
+                    SetState(State.Talk);
                     message.SetActive(true);
                 }
             }
@@ -199,11 +223,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public void SetState(State state)
         {
             this.state = state;
-        }
-
-        State GetState()
-        {
-            return state;
         }
 
         public bool Catch()

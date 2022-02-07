@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityStandardAssets.Characters.ThirdPerson;
+
 
 public class HouseManager : MonoBehaviour
 {
@@ -28,16 +30,26 @@ public class HouseManager : MonoBehaviour
         {
             isFadeIn = false;
             var name = this.gameObject.name;
+            PlayerControl player = other.GetComponent<PlayerControl>();
+            player.SetState(State.Talk);
             if(name == "To1F")
             {
                 Transform point1 = GameObject.Find("1FPoint").GetComponent<Transform>();
-                target.DOColor(Color.black, 1f).SetEase(Ease.Flash).OnComplete(() => MovePoint(point1));
+                target.DOColor(Color.black, 1f).SetEase(Ease.Flash).OnComplete(() =>
+                {
+                    MovePoint(point1);
+                    player.SetState(State.Normal);
+                });
 
             }
             if (name == "To2F")
             {
                 Transform point2 = GameObject.Find("2FPoint").GetComponent<Transform>();
-                target.DOColor(Color.black, 1f).SetEase(Ease.Flash).OnComplete(() => MovePoint(point2));
+                target.DOColor(Color.black, 1f).SetEase(Ease.Flash).OnComplete(() =>
+                {
+                    MovePoint(point2);
+                    player.SetState(State.Normal);
+                });
             }
         }
     }

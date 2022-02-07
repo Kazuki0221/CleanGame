@@ -358,6 +358,7 @@ GameObject:
   - component: {fileID: 153313663}
   - component: {fileID: 153313665}
   - component: {fileID: 153313664}
+  - component: {fileID: 153313666}
   m_Layer: 5
   m_Name: Chara
   m_TagString: Untagged
@@ -421,6 +422,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153313662}
   m_CullTransparentMesh: 0
+--- !u!95 &153313666
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153313662}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cfa8362c634598f4f8fa53a965ed38ed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &155133539
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,6 +602,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 0
   clickFlag: 0
+  chara: {fileID: 0}
+  sceneState: 0
 --- !u!4 &359658538
 Transform:
   m_ObjectHideFlags: 0
@@ -1600,7 +1622,7 @@ PrefabInstance:
     - target: {fileID: 6727806299605401370, guid: 912096b215ae42942a0dafa77524e960,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6727806299605401381, guid: 912096b215ae42942a0dafa77524e960,
         type: 3}
@@ -1710,12 +1732,12 @@ PrefabInstance:
     - target: {fileID: 6727806299910305300, guid: 912096b215ae42942a0dafa77524e960,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6727806300384632310, guid: 912096b215ae42942a0dafa77524e960,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 912096b215ae42942a0dafa77524e960, type: 3}

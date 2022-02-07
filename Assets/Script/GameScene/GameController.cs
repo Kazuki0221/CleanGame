@@ -50,9 +50,7 @@ public class GameController : MonoBehaviour
 
         firstPlayerPos = new Vector3(0, 1, 0);
 
-        //playerPrefs = GameManager.chara;
         playerPrefs = FindObjectOfType<GameManager>().chara.Game;
-
 
         charaObj = Instantiate(playerPrefs, firstPlayerPos, playerPrefs.transform.rotation);
         charaObj.name = playerPrefs.name;

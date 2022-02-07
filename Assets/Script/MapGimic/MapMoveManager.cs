@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityStandardAssets.Characters.ThirdPerson;
+
 
 public class MapMoveManager : MonoBehaviour
 {
@@ -20,6 +22,8 @@ public class MapMoveManager : MonoBehaviour
         if(other.CompareTag("Player") )
         {
             var name = this.gameObject.tag;
+            PlayerControl player = other.GetComponent<PlayerControl>();
+            player.SetState(State.Talk);
             if (name == "HouseArea") {
                 target.DOColor(Color.black, 3f).SetEase(Ease.Flash).OnComplete(() => SceneManager.LoadScene("House"));
             }
@@ -30,7 +34,6 @@ public class MapMoveManager : MonoBehaviour
             else if(name == "MapOutArea")
             {
                 target.DOColor(Color.black, 3f).SetEase(Ease.Flash).OnComplete(() => SceneManager.LoadScene("Map"));
-                
             }
         }
 

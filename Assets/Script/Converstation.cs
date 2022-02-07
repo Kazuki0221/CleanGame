@@ -27,13 +27,13 @@ public class Converstation : MonoBehaviour
         if (GetTrigger())
         {
             sentenceUI.SetActive(true);
-            player.SetState(PlayerControl.State.Talk);
+            //player.SetState(State.Talk);
         }
         else
         {
             sentenceUI.SetActive(false);
             isTalk = false;
-            player.SetState(PlayerControl.State.Normal);
+            //player.SetState(State.Normal);
         }
     }
 
@@ -43,6 +43,7 @@ public class Converstation : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                player.SetState(State.Talk);
                 sentenceManager.SetState(SceneState.NPC);
                 isTalk = true;
                 SetTrigger(true);
@@ -54,6 +55,7 @@ public class Converstation : MonoBehaviour
     {
         if(other.gameObject.tag == "NPC")
         {
+            player.SetState(State.Normal);
             sentenceManager.SetState(SceneState.Active);
         }
     }

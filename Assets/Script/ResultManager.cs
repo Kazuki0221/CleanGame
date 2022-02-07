@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class ResultManager : MonoBehaviour
 {
     [SerializeField]List<GameObject> btn = new List<GameObject>();
+    List<GameObject> activeButton = new List<GameObject>();
     int highScore;
     [SerializeField] Text result_text;
     //[SerializeField] GameObject[] images;
@@ -29,6 +32,23 @@ public class ResultManager : MonoBehaviour
 
         //this.transform.position = images[0].transform.position;
         source = GetComponent<AudioSource>();
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if(gameManager.sceneState == GameManager.BeforeSceneState.Adventure)
+        {
+            for(int i = 0; i < 3; i++)
+            {
+                btn[i].SetActive(false);
+            }
+        }
+        else if(gameManager.sceneState == GameManager.BeforeSceneState.StageSelect)
+        {
+            for(int i = 3; i < btn.Count; i++)
+            {
+                btn[i].SetActive(false);
+            }
+        }
+
+        activeButton = btn.Where(go => go.activeSelf).ToList();
 
     }
 
@@ -45,7 +65,7 @@ public class ResultManager : MonoBehaviour
         if (h > 0)
         {
             num++;
-            if (num > btn.Count - 1) num = 0;
+            if (num > activeButton.Count - 1) num = 0;
             //this.transform.position = images[num].transform.position;
             Sound(0);
             delayInput += 0.2f;
@@ -53,23 +73,23 @@ public class ResultManager : MonoBehaviour
         else if (h < 0)
         {
             num--;
-            if (num < 0) num = btn.Count - 1;
+            if (num < 0) num = activeButton.Count - 1;
             //this.transform.position = images[num].transform.position;
             Sound(0);
             delayInput += 0.2f;
         }
-        EventSystem.current.SetSelectedGameObject(btn[num]);
+        EventSystem.current.SetSelectedGameObject(activeButton[num]);
         btn[num].GetComponent<Button>().OnSelect(null);
 
-        for(int i = 0; i < btn.Count; i++)
+        for(int i = 0; i < activeButton.Count; i++)
         {
             if(i != num)
             {
-                btn[i].GetComponent<Image>().color = Color.white;
+                activeButton[i].GetComponent<Image>().color = Color.white;
             }
             else
             {
-                btn[i].GetComponent<Image>().color = Color.cyan;
+                activeButton[i].GetComponent<Image>().color = Color.cyan;
             }
         }
 
@@ -102,13 +122,23 @@ public class ResultManager : MonoBehaviour
     {
         triggerNum = 1;
         FindObjectOfType<GameManager>().clickFlag = true;
-
     }
 
     public void ToStageSelect()
     {
         triggerNum = 2;
         FindObjectOfType<GameManager>().clickFlag = true;
+    }
 
+    public void Retry()
+    {
+
+    }
+
+    public void ToMap()
+    {
+        FindObjectOfType<GameManager>().mode = GameMode.Adventure;
+        SceneManager.LoadScene(GameManager.sceneName);
+        GameManager.sceneName = SceneManager.GetActiveScene().name;
     }
 }

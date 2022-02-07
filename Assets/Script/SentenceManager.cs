@@ -4,6 +4,8 @@ using UnityEngine;
 using System;
 using System.IO;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.ThirdPerson;
+
 
 
 public enum SceneState
@@ -88,7 +90,11 @@ public class SentenceManager : MonoBehaviour
             }
             else
             {
-                if (converstation) converstation.SetTrigger(false);
+                if (converstation)
+                {
+                    converstation.SetTrigger(false);
+                    FindObjectOfType<PlayerControl>().SetState(State.Normal);
+                }
             }
 
         }
