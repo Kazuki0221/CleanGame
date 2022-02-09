@@ -13,7 +13,9 @@ public class MoveStage : MonoBehaviour
     [SerializeField]List<GameObject> button = new List<GameObject>();
     int num = 0;
     float delayInput;
-    [SerializeField] string stageName;
+    [SerializeField] string stageName;//遷移先ステージ
+    //[SerializeField] int stageNum = 0;//遷移先ステージID
+    //List<PlayerPrefs> storyFlags = new List<PlayerPrefs>();
 
     [SerializeField] List<CharaData> CharaDatas = new List<CharaData>();
 
@@ -65,7 +67,7 @@ public class MoveStage : MonoBehaviour
         }
     }
 
-    public void ToStage()
+    public void ToMove()
     {
         string charaName = GameObject.FindGameObjectWithTag("Player").name.Replace("(Adventure)", "");
         gameManager.chara = CharaDatas.Where(c => c.name == charaName).FirstOrDefault();

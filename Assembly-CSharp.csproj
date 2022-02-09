@@ -140,8 +140,6 @@
     <Compile Include="Assets\Asset\UnityChan\UnityChan.SpringBone\Script\Utility\PathUtil.cs" />
     <Compile Include="Assets\Asset\UnityChan\UnityChan.SpringBone\Script\Utility\StringUtil.cs" />
     <Compile Include="Assets\Asset\UnityChan\UnityChan.SpringBone\Script\Utility\TextRecordParsing.cs" />
-    <Compile Include="Assets\Script\Converstation.cs" />
-    <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\GameScene\Bin.cs" />
     <Compile Include="Assets\Script\GameScene\CItem.cs" />
     <Compile Include="Assets\Script\GameScene\CSlot.cs" />
@@ -162,14 +160,18 @@
     <Compile Include="Assets\Script\MapGimic\MapMoveManager.cs" />
     <Compile Include="Assets\Script\MapGimic\MoveStage.cs" />
     <Compile Include="Assets\Script\MapGimic\OutMap.cs" />
-    <Compile Include="Assets\Script\MiniMapCamera.cs" />
-    <Compile Include="Assets\Script\PlayerCharacter.cs" />
-    <Compile Include="Assets\Script\PlayerControl.cs" />
-    <Compile Include="Assets\Script\ResultManager.cs" />
+    <Compile Include="Assets\Script\Sample\SaveTest.cs" />
+    <Compile Include="Assets\Script\Sample\SaveTestScript.cs" />
     <Compile Include="Assets\Script\Sample\UnityCanTest.cs" />
-    <Compile Include="Assets\Script\SentenceManager.cs" />
-    <Compile Include="Assets\Script\StageSelectManager.cs" />
-    <Compile Include="Assets\Script\TitleManager.cs" />
+    <Compile Include="Assets\Script\System\Converstation.cs" />
+    <Compile Include="Assets\Script\System\GameManager.cs" />
+    <Compile Include="Assets\Script\System\MiniMapCamera.cs" />
+    <Compile Include="Assets\Script\System\PlayerCharacter.cs" />
+    <Compile Include="Assets\Script\System\PlayerControl.cs" />
+    <Compile Include="Assets\Script\System\ResultManager.cs" />
+    <Compile Include="Assets\Script\System\SentenceManager.cs" />
+    <Compile Include="Assets\Script\System\StageSelectManager.cs" />
+    <Compile Include="Assets\Script\System\TitleManager.cs" />
     <Compile Include="Assets\Terasurware\Classes\Entity_Sheets.cs" />
   </ItemGroup>
   <ItemGroup>
