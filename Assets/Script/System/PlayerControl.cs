@@ -71,8 +71,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     Quaternion spownRot = SaveDataManager.sd.playerRot;
                     if (spownPoint != null && spownRot != null)
                     {
-                        Debug.Log(spownPoint);
-
                         GameObject cameraRig = GameObject.FindGameObjectWithTag("Camera");
 
                         transform.position = spownPoint;
@@ -94,7 +92,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         cameraRig.transform.position = spownPoint.transform.position - new Vector3(2, 0, 2);
                         cameraRig.transform.rotation = spownPoint.transform.rotation;
                     }
-                    
+                    SaveManager.flags[SaveManager.flags.Count - 1] = true;
+                    SaveManager.flags.Add(false);
                 }
                 else
                 {
@@ -124,7 +123,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         }
 
-
         private void Update()
         {
             if (!m_Jump)
@@ -132,7 +130,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
         }
-
 
         // Fixed update is called in sync with physics
         private void FixedUpdate()

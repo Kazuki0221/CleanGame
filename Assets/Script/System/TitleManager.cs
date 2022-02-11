@@ -29,7 +29,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] AudioClip sound;
     [SerializeField] AudioClip start;
 
-    const string path = "/SaveData.json";
+    const string path = "SaveData.json";
     string filePath;
 
     void Start()
@@ -39,16 +39,23 @@ public class TitleManager : MonoBehaviour
         c = start_text.color;
         alpha = 1;
         mode.ForEach(go => go.SetActive(false));
-        foreach (var b in buttons)
-        {
-            b.SetActive(false);
-        }
 
-        filePath = Directory.GetCurrentDirectory() + path;
+        filePath = Directory.GetCurrentDirectory() + "/" + path;
         if (File.Exists(filePath))
         {
             SaveDataManager.Load();
         }
+
+        foreach (var b in buttons)
+        {
+            if (!File.Exists(filePath))
+            {
+                b.GetComponent<Image>().color = Color.gray;
+            }
+            b.SetActive(false);
+        }
+
+        
 
     }
 
@@ -123,10 +130,22 @@ public class TitleManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(buttons[num]);
             buttons[num].GetComponent<Button>().OnSelect(null);
 
+            if(!File.Exists(filePath))
+            {
+                num = 0;
+            }
+
             if (num == 0)
             {
                 buttons[0].GetComponent<Image>().color = Color.cyan;
-                buttons[1].GetComponent<Image>().color = Color.white;
+                if (!File.Exists(filePath))
+                {
+                    buttons[1].GetComponent<Image>().color = Color.gray;
+                }
+                else
+                {
+                    buttons[1].GetComponent<Image>().color = Color.white;
+                }
 
             }
             else if (num == 1)
@@ -176,7 +195,6 @@ public class TitleManager : MonoBehaviour
     {
         //ロード判定
         GameManager.sceneName = "Load";
-        Debug.Log(SaveDataManager.sd.lastSceneName);
         SceneManager.LoadScene(SaveDataManager.sd.lastSceneName);
     }
 
@@ -184,12 +202,12 @@ public class TitleManager : MonoBehaviour
     {
         if (File.Exists(filePath))
         {
+
             SaveDataManager.InitData();
         }
         else
         {
             SaveDataManager.Load();
-            Debug.Log("データ作成:");
             SaveDataManager.Save();
         }
         SceneManager.LoadScene("City");

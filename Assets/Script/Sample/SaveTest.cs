@@ -43,6 +43,7 @@ public static class SaveTest
         string path = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('//');
 #endif
         path += ("/" + filePath);
+        Debug.Log(path);
         StreamWriter writer = new StreamWriter(path, false);
         writer.WriteLine(json);
         writer.Flush();
