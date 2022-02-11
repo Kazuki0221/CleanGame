@@ -169,6 +169,8 @@
     <Compile Include="Assets\Script\System\PlayerCharacter.cs" />
     <Compile Include="Assets\Script\System\PlayerControl.cs" />
     <Compile Include="Assets\Script\System\ResultManager.cs" />
+    <Compile Include="Assets\Script\System\SaveDataManager.cs" />
+    <Compile Include="Assets\Script\System\SaveManager.cs" />
     <Compile Include="Assets\Script\System\SentenceManager.cs" />
     <Compile Include="Assets\Script\System\StageSelectManager.cs" />
     <Compile Include="Assets\Script\System\TitleManager.cs" />

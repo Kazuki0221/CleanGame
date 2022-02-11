@@ -14,6 +14,7 @@ TagManager:
   - MapOutArea
   - Camera
   - Fade
+  - SaveLoad
   layers:
   - Default
   - TransparentFX

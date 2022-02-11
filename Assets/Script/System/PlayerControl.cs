@@ -41,6 +41,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
          public GameObject message;
         GameObject converstation;
+
+        public static bool loadFlag = false;
         private void Start()
         {
             // get the transform of the main camera
@@ -63,7 +65,21 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 SetState(State.Normal);
                 if(TalkArea != null)TalkArea.SetActive(true);
-                if (GameManager.sceneName != "ResultScene") 
+                if(loadFlag)
+                {
+                    Transform spownPoint = SaveDataManager.sd.player;
+                    if (spownPoint)
+                    {
+                        GameObject cameraRig = GameObject.FindGameObjectWithTag("Camera");
+
+                        transform.position = spownPoint.position;
+                        transform.rotation = spownPoint.rotation;
+                        cameraRig.transform.position = spownPoint.transform.position;
+                        cameraRig.transform.rotation = spownPoint.transform.rotation;
+                    }
+                    loadFlag = false;
+                }
+                else if (GameManager.sceneName != "ResultScene") 
                 {
                     GameObject spownPoint = GameObject.FindGameObjectWithTag("SpownPoint");
                     if (spownPoint)

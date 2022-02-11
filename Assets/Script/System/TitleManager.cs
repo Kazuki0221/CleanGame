@@ -1,13 +1,16 @@
 ﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> mode = new List<GameObject>();
+    [SerializeField] GameObject[] buttons = new GameObject[2];
     int num = 0;
     float delayInput;
     public int modeTrigger = 0;
@@ -18,7 +21,8 @@ public class TitleManager : MonoBehaviour
     Color c;
     float alpha;
 
-    public bool trigger = false;
+    public bool modeClick = false;
+    public bool startOrContinue = false;
 
     //Audio
     AudioSource source;
@@ -31,6 +35,11 @@ public class TitleManager : MonoBehaviour
 
         c = start_text.color;
         alpha = 1;
+        mode.ForEach(go => go.SetActive(false));
+        foreach (var b in buttons)
+        {
+            b.SetActive(false);
+        }
 
     }
 
@@ -43,11 +52,21 @@ public class TitleManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Fire1"))
         {
-            if (!trigger)
+            if (!modeClick)
             {
                 start_text.gameObject.SetActive(false);
                 mode.ForEach(go => go.SetActive(true));
-                trigger = true;
+                modeClick = true;
+            }
+
+            else if(!startOrContinue)
+            {
+                mode.ForEach(go => go.SetActive(false));
+                foreach(var b in buttons)
+                {
+                    b.SetActive(true);
+                }
+                startOrContinue = true;
             }
             //if (trigger)
             //    source.PlayOneShot(start);
@@ -71,27 +90,47 @@ public class TitleManager : MonoBehaviour
             //Sound(0);
             delayInput += 0.2f;
         }
-        EventSystem.current.SetSelectedGameObject(mode[num]);
-        mode[num].GetComponent<Button>().OnSelect(null);
-
-        if (num == 0)
+        if (mode[0].activeSelf && mode[1].activeSelf) 
         {
-            mode[0].GetComponent<Image>().color = Color.cyan;
-            mode[1].GetComponent<Image>().color = Color.white;
-            modeTrigger = 0;
+            EventSystem.current.SetSelectedGameObject(mode[num]);
+            mode[num].GetComponent<Button>().OnSelect(null);
 
+            if (num == 0)
+            {
+                mode[0].GetComponent<Image>().color = Color.cyan;
+                mode[1].GetComponent<Image>().color = Color.white;
+                modeTrigger = 0;
+
+            }
+            else if (num == 1)
+            {
+                mode[1].GetComponent<Image>().color = Color.cyan;
+                mode[0].GetComponent<Image>().color = Color.white;
+                modeTrigger = 1;
+            }
         }
-        else if (num == 1)
+        else if(buttons[0].activeSelf && buttons[1].activeSelf)
         {
-            mode[1].GetComponent<Image>().color = Color.cyan;
-            mode[0].GetComponent<Image>().color = Color.white;
-            modeTrigger = 1;
+            EventSystem.current.SetSelectedGameObject(buttons[num]);
+            buttons[num].GetComponent<Button>().OnSelect(null);
+
+            if (num == 0)
+            {
+                buttons[0].GetComponent<Image>().color = Color.cyan;
+                buttons[1].GetComponent<Image>().color = Color.white;
+
+            }
+            else if (num == 1)
+            {
+                buttons[1].GetComponent<Image>().color = Color.cyan;
+                buttons[0].GetComponent<Image>().color = Color.white;
+            }
         }
 
 
         //UI
         
-        if (!trigger)
+        if (!modeClick)
         {
             start_text.color = new Color(c.r, c.g, c.b, alpha);
 
@@ -121,5 +160,29 @@ public class TitleManager : MonoBehaviour
     public void OnClick()
     {
         FindObjectOfType<GameManager>().clickFlag = true ;
+        num = 0;
+    }
+
+    public void Load()
+    {
+        //ロード判定
+        GameManager.sceneName = "Load";
+        SceneManager.LoadScene(SaveDataManager.sd.lastSceneName);
+    }
+
+    public void Init()
+    {
+        string path = Directory.GetCurrentDirectory() + "/SaveData.json";
+        if (File.Exists(path))
+        {
+            SaveDataManager.InitData();
+        }
+        else
+        {
+            SaveDataManager.Load();
+            Debug.Log("データ作成:");
+            
+        }
+        SceneManager.LoadScene("City");
     }
 }

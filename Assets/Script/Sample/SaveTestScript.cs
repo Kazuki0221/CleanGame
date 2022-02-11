@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SaveTestScript : MonoBehaviour
 {
-    List<bool> flags = new List<bool>();
+    //List<bool> flags = new List<bool>();
     void Start()
     {
         SaveTest.Load();
@@ -21,5 +21,5 @@ public class SaveTestScript : MonoBehaviour
     {
         SaveTest.loadFlag();
     }
-    
+
 }

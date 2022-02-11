@@ -65,7 +65,8 @@ public class GameManager : MonoBehaviour
                 if (titleManager.modeTrigger == 0)
                 {
                     mode = GameMode.Adventure;
-                    SceneManager.LoadScene("City");
+                    //SceneManager.LoadScene("City"); 
+                    clickFlag = false;
                 }
                 else if (titleManager.modeTrigger == 1)
                 {

@@ -5,14 +5,14 @@ using System.IO;
 using UnityEngine;
 
 [Serializable]
-public struct SaveData
+public struct SaveDataTest
 {
     public List<bool> flags;
 }
 
 public static class SaveTest
 {
-    public static SaveData sd;
+    public static SaveDataTest sd;
     const string filePath = "saveTest.json";
 
     public static void saveFlag(bool _flags)
@@ -56,11 +56,11 @@ public static class SaveTest
             FileInfo info = new FileInfo(path + "/" + filePath);
             StreamReader reader = new StreamReader(info.OpenRead());
             string json = reader.ReadToEnd();
-            sd = JsonUtility.FromJson<SaveData>(json);
+            sd = JsonUtility.FromJson<SaveDataTest>(json);
         }
         catch(Exception e)
         {
-            sd = new SaveData();
+            sd = new SaveDataTest();
         }
     }
 }
