@@ -55,31 +55,41 @@ public class SaveManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(button[num]);
             button[num].GetComponent<Button>().OnSelect(null);
 
-            if (num == 0)
-            {
-                button[0].GetComponent<Image>().color = Color.cyan;
-                button[1].GetComponent<Image>().color = Color.white;
 
-            }
-            else if (num == 1)
+            for (int i = 0; i < button.Count;i++)
             {
-                button[1].GetComponent<Image>().color = Color.cyan;
-                button[0].GetComponent<Image>().color = Color.white;
+                if(i == num)
+                {
+                    button[i].GetComponent<Image>().color = Color.cyan;
+                }
+                else
+                {
+                    button[i].GetComponent<Image>().color = Color.white;
+                }
             }
+
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                FindObjectOfType<PlayerControl>().SetState(State.Normal);
+                option.SetActive(false);
+            }
+
         }
         else
         {
             if(Input.GetKeyDown(KeyCode.Tab))
             {
+                FindObjectOfType<PlayerControl>().SetState(State.Talk);
                 option.SetActive(true);
             }
         }
     }
     public void Save()
     {
-        Transform transform = GameObject.FindGameObjectWithTag("Player").transform;
+        Vector3 pos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        Quaternion rot = GameObject.FindGameObjectWithTag("Player").transform.rotation;
         string sceneName = SceneManager.GetActiveScene().name;
-        SaveDataManager.SaveProgress(flags, transform, sceneName);
+        SaveDataManager.SaveProgress(flags, pos, rot, sceneName);
     }
 
     public void Load()
@@ -92,11 +102,6 @@ public class SaveManager : MonoBehaviour
     public void ToTitle()
     {
         SceneManager.LoadScene("Title");
-    }
-
-    public void Back()
-    {
-        option.SetActive(false);
     }
 
 }

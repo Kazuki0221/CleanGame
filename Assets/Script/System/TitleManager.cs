@@ -29,6 +29,9 @@ public class TitleManager : MonoBehaviour
     [SerializeField] AudioClip sound;
     [SerializeField] AudioClip start;
 
+    const string path = "/SaveData.json";
+    string filePath;
+
     void Start()
     {
         source = GetComponent<AudioSource>();
@@ -39,6 +42,12 @@ public class TitleManager : MonoBehaviour
         foreach (var b in buttons)
         {
             b.SetActive(false);
+        }
+
+        filePath = Directory.GetCurrentDirectory() + path;
+        if (File.Exists(filePath))
+        {
+            SaveDataManager.Load();
         }
 
     }
@@ -167,13 +176,13 @@ public class TitleManager : MonoBehaviour
     {
         //ロード判定
         GameManager.sceneName = "Load";
+        Debug.Log(SaveDataManager.sd.lastSceneName);
         SceneManager.LoadScene(SaveDataManager.sd.lastSceneName);
     }
 
     public void Init()
     {
-        string path = Directory.GetCurrentDirectory() + "/SaveData.json";
-        if (File.Exists(path))
+        if (File.Exists(filePath))
         {
             SaveDataManager.InitData();
         }
@@ -181,7 +190,7 @@ public class TitleManager : MonoBehaviour
         {
             SaveDataManager.Load();
             Debug.Log("データ作成:");
-            
+            SaveDataManager.Save();
         }
         SceneManager.LoadScene("City");
     }

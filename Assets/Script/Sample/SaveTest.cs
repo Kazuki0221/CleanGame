@@ -17,8 +17,13 @@ public static class SaveTest
 
     public static void saveFlag(bool _flags)
     {
+        if(sd.flags == null)
+        {
+            sd.flags = new List<bool>();
+        }
         sd.flags.Add(_flags);
         Save();
+        Debug.Log("Save");
     }
 
     public static void loadFlag()

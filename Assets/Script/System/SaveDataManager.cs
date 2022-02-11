@@ -8,7 +8,8 @@ using UnityEngine;
 public struct SaveData
 {
     public List<bool> flags;
-    public Transform player;
+    public Vector3 playerPos;
+    public Quaternion playerRot;
     public string lastSceneName;
 }
 
@@ -18,10 +19,11 @@ public static class SaveDataManager
     const string filePath = "SaveData.json";
 
     //セーブ
-    public static void SaveProgress(List<bool> _flags, Transform t, string name)
+    public static void SaveProgress(List<bool> _flags, Vector3 pos,Quaternion rot, string name)
     {
         sd.flags = _flags;
-        sd.player = t;
+        sd.playerPos = pos;
+        sd.playerRot = rot;
         sd.lastSceneName = name;
         Save();
     }
@@ -34,13 +36,15 @@ public static class SaveDataManager
     //セーブデータの初期化
     public static void InitData()
     {
-        if(sd.flags.Count == 0)
+        if(sd.flags == null)
         {
+            sd.flags = new List<bool>();
             sd.flags.Add(false);
         }
         sd.flags.Clear();
         sd.flags.Add(false);
-        sd.player = null;
+        sd.playerPos = new Vector3(0, 0, 0);
+        sd.playerRot = Quaternion.Euler(0, 0, 0);
         sd.lastSceneName = "";
         Save();
     }

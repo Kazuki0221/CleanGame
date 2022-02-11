@@ -8742,7 +8742,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 365077941}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 879385497}
+        m_MethodName: Save
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &365077941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14367,7 +14378,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 672880018}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 879385497}
+        m_MethodName: Load
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &672880018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27006,7 +27028,7 @@ PrefabInstance:
     - target: {fileID: 8740798971438576063, guid: ce9bb6579962e4b489a4cbf16e989e14,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8740798971438576063, guid: ce9bb6579962e4b489a4cbf16e989e14,
         type: 3}
@@ -27016,7 +27038,7 @@ PrefabInstance:
     - target: {fileID: 8740798971438576063, guid: ce9bb6579962e4b489a4cbf16e989e14,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 8740798971438576063, guid: ce9bb6579962e4b489a4cbf16e989e14,
         type: 3}
@@ -35782,7 +35804,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1607312921}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 879385497}
+        m_MethodName: ToTitle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1607312921
 MonoBehaviour:
   m_ObjectHideFlags: 0
