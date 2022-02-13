@@ -1056,7 +1056,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7244892581496916719}
-        m_MethodName: ToStage
+        m_MethodName: ToMove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1430,6 +1430,7 @@ MonoBehaviour:
   - {fileID: 7244892580730841480}
   - {fileID: 7244892579733925137}
   stageName: Tutorial
+  m_storyID: 0
   CharaDatas:
   - {fileID: 11400000, guid: 4f146110991000b4ba6182722f2b95e5, type: 2}
   - {fileID: 11400000, guid: 6ed0577d21f185943a91e49dce7b25dc, type: 2}

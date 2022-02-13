@@ -44,21 +44,21 @@ public class Converstation : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 player.SetState(State.Talk);
-                sentenceManager.SetState(SceneState.NPC);
+                SentenceManager.SetState(SceneState.NPC);
                 isTalk = true;
                 SetTrigger(true);
             }
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject.tag == "NPC")
-        {
-            player.SetState(State.Normal);
-            sentenceManager.SetState(SceneState.Active);
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if(other.gameObject.tag == "NPC")
+    //    {
+    //        player.SetState(State.Normal);
+    //        SentenceManager.SetState(SceneState.Active);
+    //    }
+    //}
 
     public void SetTrigger(bool t)
     {

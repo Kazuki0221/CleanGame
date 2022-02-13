@@ -11,16 +11,21 @@ public class CSlot : MonoBehaviour
     public void SetItem(CItem item)
     {
         Item = item;
-        if (item != null)
+        if (Item != null)
         {
             ItemImage.sprite = item.ItemImage;
-            ItemImage.color = new Color(255, 255, 255, 255);
+            ItemImage.color = Color.white;
         }
         else
         {
             ItemImage.sprite = null;
-            //ItemImage.color = new Color(255, 255, 255, 255);
-
         }
+    }
+
+    public void ReleseItem(CItem item)
+    {
+        Item = item;
+        ItemImage.color = new Color(204, 204, 204, 255);
+
     }
 }

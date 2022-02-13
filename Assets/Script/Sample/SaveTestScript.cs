@@ -8,7 +8,6 @@ public class SaveTestScript : MonoBehaviour
     void Start()
     {
         SaveTest.Load();
-        Debug.Log(System.IO.Directory.GetCurrentDirectory());
     }
 
     public void Save()

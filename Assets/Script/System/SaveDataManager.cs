@@ -41,9 +41,11 @@ public static class SaveDataManager
             sd.flags = new List<bool>();
             sd.flags.Add(false);
         }
-        
-        sd.flags.Clear();
-        sd.flags.Add(false);
+        else
+        {
+            sd.flags.Clear();
+            sd.flags.Add(false);
+        } 
         sd.playerPos = new Vector3(0, 0, 0);
         sd.playerRot = Quaternion.Euler(0, 0, 0);
         sd.lastSceneName = "";

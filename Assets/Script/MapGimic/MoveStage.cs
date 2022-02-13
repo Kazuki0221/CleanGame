@@ -14,8 +14,11 @@ public class MoveStage : MonoBehaviour
     int num = 0;
     float delayInput;
     [SerializeField] string stageName;//遷移先ステージ
+    public static string ToStageName;
     //[SerializeField] int stageNum = 0;//遷移先ステージID
     //List<PlayerPrefs> storyFlags = new List<PlayerPrefs>();
+    [SerializeField]int m_storyID;
+    public static int storyID;
 
     [SerializeField] List<CharaData> CharaDatas = new List<CharaData>();
 
@@ -73,7 +76,17 @@ public class MoveStage : MonoBehaviour
         gameManager.chara = CharaDatas.Where(c => c.name == charaName).FirstOrDefault();
         gameManager.sceneState = GameManager.BeforeSceneState.Adventure;
         GameManager.sceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(stageName);
+        ToStageName = stageName;
+        if(SaveManager.flags[m_storyID] == false)
+        {
+            storyID = m_storyID;
+            SentenceManager.SetState(SceneState.Story);
+            SceneManager.LoadScene("Story");
+        }
+        else
+        {
+            SceneManager.LoadScene(ToStageName);
+        }
     }
 
     public void Back()

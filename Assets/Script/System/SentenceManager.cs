@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.IO;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.ThirdPerson;
 
 
@@ -17,14 +18,16 @@ public enum SceneState
 public class SentenceManager : MonoBehaviour
 {
     
-    [SerializeField]SceneState sceneState;
+    [SerializeField]public static SceneState sceneState;
 
     //bool firstEnable = true;
 
     Entity_Sheets es;//エクセルデータ
     int num = 0;    //会話順
+    int endNum;     //最終会話
     int sheetsID = 0;//シートID
     bool active = true;//決定した際のトリガー用変数
+    [SerializeField]int storyID;
 
     [SerializeField] Text charaname;    //キャラ名テキスト
     [SerializeField] Text sentence;     //会話テキスト
@@ -47,18 +50,40 @@ public class SentenceManager : MonoBehaviour
 
         //}
         //else firstEnable = false;
+       
         es = Resources.Load("SentenceData") as Entity_Sheets;
+        InitData();//データ初期化
+        if (sceneState == SceneState.Story)
+        {
+            storyID = MoveStage.storyID;
+            storyID = 0;
+            for (int i = 0; i < es.sheets[sheetsID].list.Count; i++)
+            {
+                if (es.sheets[sheetsID].list[i].storyID == storyID)
+                {
+                    num = i;
+                    break;
+                }
+            }
+            for (int i = num; i < es.sheets[sheetsID].list.Count; i++)
+            {
+                if (es.sheets[sheetsID].list[i].storyID != storyID)
+                {
+                    endNum = i - 1;
+                    break;
+                }
+                endNum = i;
+            }
+        }
+
         if (FindObjectOfType<Converstation>()) converstation = FindObjectOfType<Converstation>();
-        sceneState = GetState();
         if (sceneState == SceneState.Story) sheetsID = 0;
         else if (sceneState == SceneState.NPC) sheetsID = 1;
 
-        InitData();//データ初期化
-
-        temp[0] = es.sheets[sheetsID].list[0].charaID;
+        temp[0] = es.sheets[sheetsID].list[num].charaID;
         charaImg[0].sprite = chara[temp[0]];
 
-        for (int i = 0; i < es.sheets[sheetsID].list.Count; i++)
+        for (int i = num; i < es.sheets[sheetsID].list.Count; i++)
         {
             if (es.sheets[sheetsID].list[i].charaID != temp[0])
             {
@@ -82,25 +107,30 @@ public class SentenceManager : MonoBehaviour
         //会話進行処理
         if (Input.GetKeyDown(KeyCode.Return))
         {
-
-            if (num < es.sheets[sheetsID].list.Count - 1)
+            if (num < endNum)
             {
                 num++;
                 active = true;
             }
             else
             {
-                if (converstation)
+                if(sceneState == SceneState.Story)
                 {
-                    converstation.SetTrigger(false);
-                    FindObjectOfType<PlayerControl>().SetState(State.Normal);
+                    SceneManager.LoadScene(MoveStage.ToStageName);
+                    SetState(SceneState.Active);
+                }
+                else if(sceneState == SceneState.NPC)
+                {
+                    if (converstation)
+                    {
+                        converstation.SetTrigger(false);
+                        FindObjectOfType<PlayerControl>().SetState(State.Normal);
+                        SetState(SceneState.Active);
+                    }
                 }
             }
-
         }
         if(active) StorySheet(sheetsID);
-
-
     }
 
     //ストーリーシート
@@ -145,9 +175,9 @@ public class SentenceManager : MonoBehaviour
 
     }
 
-    public void SetState(SceneState state)
+    public static void SetState(SceneState state)
     {
-        this.sceneState = state;
+        sceneState = state;
     }
     
     public SceneState GetState()

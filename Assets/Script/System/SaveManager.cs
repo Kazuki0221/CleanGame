@@ -20,10 +20,17 @@ public class SaveManager : MonoBehaviour
         if (GameManager.sceneName == "Load")
         {
             flags = SaveDataManager.sd.flags;
+            PlayerControl.loadFlag = true;
+            GameManager.sceneName = "";
+        }
+        else if(GameManager.sceneName == "Init")
+        {
+            flags.Add(false);
             GameManager.sceneName = "";
         }
         option = GameObject.Find("Option");
         option.SetActive(false);
+        Debug.Log(SaveDataManager.sd.flags[0]);
     }
     void Update()
     {

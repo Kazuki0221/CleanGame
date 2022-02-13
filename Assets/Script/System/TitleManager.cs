@@ -202,14 +202,15 @@ public class TitleManager : MonoBehaviour
     {
         if (File.Exists(filePath))
         {
-
             SaveDataManager.InitData();
         }
         else
         {
             SaveDataManager.Load();
+            SaveDataManager.InitData();
             SaveDataManager.Save();
         }
+        GameManager.sceneName = "Init";
         SceneManager.LoadScene("City");
     }
 }

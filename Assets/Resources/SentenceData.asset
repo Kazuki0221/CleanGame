@@ -43,6 +43,14 @@ MonoBehaviour:
       charaID: 0
       name: "\u3053\u306F\u304F"
       sentence: "\u305D\u308C\u3058\u3083\u3041\u3001\u59CB\u3081\u308B\u308F\u3088\uFF01"
+    - storyID: 1
+      charaID: 0
+      name: "\u3053\u306F\u304F"
+      sentence: "\u3042\u3042\u3042\u3042"
+    - storyID: 1
+      charaID: 1
+      name: "\u307F\u3055\u304D"
+      sentence: aaaaaa
   - name: NPC
     list:
     - storyID: 0

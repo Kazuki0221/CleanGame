@@ -82,14 +82,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 }
                 else if (GameManager.sceneName == "ResultScene") 
                 {
-                    GameObject spownPoint = GameObject.FindGameObjectWithTag("GamePoint");
+                    GameObject spownPoint = GameObject.Find("GamePoint");
                     if (spownPoint)
                     {
                         GameObject cameraRig = GameObject.FindGameObjectWithTag("Camera");
 
-                        transform.position = spownPoint.transform.position - new Vector3(2, 0, 2);
+                        transform.position = spownPoint.transform.position + new Vector3(2, 0, 2);
                         transform.rotation = spownPoint.transform.rotation;
-                        cameraRig.transform.position = spownPoint.transform.position - new Vector3(2, 0, 2);
+                        cameraRig.transform.position = spownPoint.transform.position + new Vector3(2, 0, 2);
                         cameraRig.transform.rotation = spownPoint.transform.rotation;
                     }
                     SaveManager.flags[SaveManager.flags.Count - 1] = true;
