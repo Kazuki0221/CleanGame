@@ -75,7 +75,7 @@ public class TitleManager : MonoBehaviour
                 modeClick = true;
             }
 
-            else if(!startOrContinue)
+            else if(!startOrContinue && modeTrigger == 0)
             {
                 mode.ForEach(go => go.SetActive(false));
                 foreach(var b in buttons)

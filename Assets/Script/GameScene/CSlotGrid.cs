@@ -41,8 +41,6 @@ public class CSlotGrid : MonoBehaviour
         if (playerControl.Release())
         {
             allItem[index] = null;
-            CSlot cSlot = slotPrefab[index].GetComponent<CSlot>();
-            cSlot.ReleseItem(allItem[index]);
         }
         
         for (int i = 0; i < slotNumber; i++)//取得したアイテムをインベントリに表示

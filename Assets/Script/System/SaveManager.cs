@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -14,6 +15,11 @@ public class SaveManager : MonoBehaviour
     float delayInput;
 
     GameObject option;
+
+    GameManager gameManager;
+    [SerializeField] List<CharaData> CharaDatas = new List<CharaData>();
+    [SerializeField] Image[] images = new Image[2];
+    [SerializeField] Text text;
 
     private void Start()
     {
@@ -30,7 +36,10 @@ public class SaveManager : MonoBehaviour
         }
         option = GameObject.Find("Option");
         option.SetActive(false);
-        Debug.Log(SaveDataManager.sd.flags[0]);
+
+        string charaName = GameObject.FindGameObjectWithTag("Player").name.Replace("(Adventure)", "");
+        gameManager = FindObjectOfType<GameManager>();
+        gameManager.chara = CharaDatas.Where(c => c.name == charaName).FirstOrDefault();
     }
     void Update()
     {
@@ -88,6 +97,9 @@ public class SaveManager : MonoBehaviour
             {
                 FindObjectOfType<PlayerControl>().SetState(State.Talk);
                 option.SetActive(true);
+                images[0].sprite = gameManager.chara.charaBack;
+                images[1].sprite = gameManager.chara.image;
+                text.text = gameManager.chara.Name;
             }
         }
     }

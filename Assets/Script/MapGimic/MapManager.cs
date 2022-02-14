@@ -64,7 +64,6 @@ public class MapManager : MonoBehaviour
     public void MoveMap()
     {
         string place = places[num].name.Replace("To", "");
-        Debug.Log(place);
         SceneManager.LoadScene(place);
     }
 }

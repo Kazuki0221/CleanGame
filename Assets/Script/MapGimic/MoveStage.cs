@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -19,8 +18,6 @@ public class MoveStage : MonoBehaviour
     //List<PlayerPrefs> storyFlags = new List<PlayerPrefs>();
     [SerializeField]int m_storyID;
     public static int storyID;
-
-    [SerializeField] List<CharaData> CharaDatas = new List<CharaData>();
 
     GameManager gameManager;
 
@@ -72,8 +69,7 @@ public class MoveStage : MonoBehaviour
 
     public void ToMove()
     {
-        string charaName = GameObject.FindGameObjectWithTag("Player").name.Replace("(Adventure)", "");
-        gameManager.chara = CharaDatas.Where(c => c.name == charaName).FirstOrDefault();
+       
         gameManager.sceneState = GameManager.BeforeSceneState.Adventure;
         GameManager.sceneName = SceneManager.GetActiveScene().name;
         ToStageName = stageName;
