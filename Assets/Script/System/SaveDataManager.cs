@@ -57,7 +57,7 @@ public static class SaveDataManager
 #if UNITY_EDITOR
         string path = Directory.GetCurrentDirectory();
 #else
-        string path = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('//');
+        string path = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\');
 #endif
         path += ("/" + filePath);
         StreamWriter writer = new StreamWriter(path, false);
@@ -73,7 +73,7 @@ public static class SaveDataManager
 #if UNITY_EDITOR
             string path = Directory.GetCurrentDirectory();
 #else
-            string path = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('//');
+            string path = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\');
 #endif
             FileInfo info = new FileInfo(path + "/" + filePath);
             StreamReader reader = new StreamReader(info.OpenRead());

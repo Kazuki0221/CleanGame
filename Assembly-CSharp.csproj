@@ -160,9 +160,6 @@
     <Compile Include="Assets\Script\MapGimic\MapMoveManager.cs" />
     <Compile Include="Assets\Script\MapGimic\MoveStage.cs" />
     <Compile Include="Assets\Script\MapGimic\OutMap.cs" />
-    <Compile Include="Assets\Script\Sample\SaveTest.cs" />
-    <Compile Include="Assets\Script\Sample\SaveTestScript.cs" />
-    <Compile Include="Assets\Script\Sample\UnityCanTest.cs" />
     <Compile Include="Assets\Script\System\Converstation.cs" />
     <Compile Include="Assets\Script\System\GameManager.cs" />
     <Compile Include="Assets\Script\System\MiniMapCamera.cs" />
