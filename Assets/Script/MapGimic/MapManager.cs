@@ -15,7 +15,14 @@ public class MapManager : MonoBehaviour
     int num = 0;
     int tempNum;
 
-    
+    AudioSource audioSource;
+    [SerializeField] AudioClip sound;
+
+    private void Start()
+    {
+        audioSource = GameObject.Find("Audio").GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         if(delayInput > 0)
@@ -63,6 +70,7 @@ public class MapManager : MonoBehaviour
 
     public void MoveMap()
     {
+        audioSource.PlayOneShot(sound);
         string place = places[num].name.Replace("To", "");
         SceneManager.LoadScene(place);
     }

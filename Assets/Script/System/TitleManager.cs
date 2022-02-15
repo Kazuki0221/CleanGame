@@ -73,6 +73,7 @@ public class TitleManager : MonoBehaviour
                 start_text.gameObject.SetActive(false);
                 mode.ForEach(go => go.SetActive(true));
                 modeClick = true;
+                source.PlayOneShot(sound);
             }
 
             else if(!startOrContinue && modeTrigger == 0)
@@ -84,8 +85,6 @@ public class TitleManager : MonoBehaviour
                 }
                 startOrContinue = true;
             }
-            //if (trigger)
-            //    source.PlayOneShot(start);
         }
 
 
@@ -188,6 +187,11 @@ public class TitleManager : MonoBehaviour
     public void OnClick()
     {
         FindObjectOfType<GameManager>().clickFlag = true ;
+        if (modeTrigger == 1)
+        {
+            source.PlayOneShot(sound);
+        }
+
         num = 0;
     }
 
@@ -196,6 +200,7 @@ public class TitleManager : MonoBehaviour
         //ロード判定
         GameManager.sceneName = "Load";
         SceneManager.LoadScene(SaveDataManager.sd.lastSceneName);
+        source.PlayOneShot(sound);
     }
 
     public void Init()
@@ -212,5 +217,7 @@ public class TitleManager : MonoBehaviour
         }
         GameManager.sceneName = "Init";
         SceneManager.LoadScene("City");
+        source.PlayOneShot(sound);
+
     }
 }

@@ -21,8 +21,15 @@ public class SaveManager : MonoBehaviour
     [SerializeField] Image[] images = new Image[2];
     [SerializeField] Text text;
 
+    AudioSource audioSource;
+    [SerializeField] AudioClip openMenu;
+    [SerializeField] AudioClip select;
+
     private void Start()
     {
+        audioSource = GameObject.Find("Audio").GetComponent<AudioSource>();
+        Debug.Log(audioSource);
+
         if (GameManager.sceneName == "Load")
         {
             flags = SaveDataManager.sd.flags;
@@ -86,6 +93,7 @@ public class SaveManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Tab))
             {
+                audioSource.PlayOneShot(openMenu);
                 FindObjectOfType<PlayerControl>().SetState(State.Normal);
                 option.SetActive(false);
             }
@@ -95,6 +103,7 @@ public class SaveManager : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.Tab))
             {
+                audioSource.PlayOneShot(openMenu);
                 FindObjectOfType<PlayerControl>().SetState(State.Talk);
                 option.SetActive(true);
                 images[0].sprite = gameManager.chara.charaBack;
@@ -105,6 +114,8 @@ public class SaveManager : MonoBehaviour
     }
     public void Save()
     {
+        audioSource.PlayOneShot(select);
+
         Vector3 pos = GameObject.FindGameObjectWithTag("Player").transform.position;
         Quaternion rot = GameObject.FindGameObjectWithTag("Player").transform.rotation;
         string sceneName = SceneManager.GetActiveScene().name;
@@ -113,6 +124,8 @@ public class SaveManager : MonoBehaviour
 
     public void Load()
     {
+        audioSource.PlayOneShot(select);
+
         flags = SaveDataManager.sd.flags;
         PlayerControl.loadFlag = true;
         SceneManager.LoadScene(SaveDataManager.sd.lastSceneName);
@@ -120,6 +133,8 @@ public class SaveManager : MonoBehaviour
 
     public void ToTitle()
     {
+        audioSource.PlayOneShot(select);
+
         SceneManager.LoadScene("Title");
     }
 

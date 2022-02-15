@@ -1765,6 +1765,8 @@ MonoBehaviour:
   - {fileID: 918070005}
   - {fileID: 580987481}
   text: {fileID: 646600333}
+  openMenu: {fileID: 8300000, guid: d7a7fff06a6d4f647b26adb07c2eb4c3, type: 3}
+  select: {fileID: 8300000, guid: 2e90e77bc9c364148946985b3cb94c4b, type: 3}
 --- !u!1 &7244892580919672994
 GameObject:
   m_ObjectHideFlags: 0
