@@ -8,6 +8,7 @@ public class Converstation : MonoBehaviour
     [SerializeField] GameObject sentenceUI; //SentenceManagerオブジェクト
     SentenceManager sentenceManager;
     PlayerControl player;
+    SaveManager saveManager;
 
     bool isTalk = false;
     bool trigger = false;
@@ -20,6 +21,7 @@ public class Converstation : MonoBehaviour
             sentenceUI.SetActive(false);
         }
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+        saveManager = FindObjectOfType<SaveManager>();
     }
 
     void Update()
@@ -39,7 +41,7 @@ public class Converstation : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag == "NPC" && !isTalk)
+        if(other.gameObject.tag == "NPC" && !isTalk && !saveManager.option.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {

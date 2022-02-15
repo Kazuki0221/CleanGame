@@ -14,7 +14,9 @@ public class SaveManager : MonoBehaviour
     int num = 0;
     float delayInput;
 
-    GameObject option;
+    public GameObject option;
+    GameObject help;
+    bool helpFlag = false;
 
     GameManager gameManager;
     [SerializeField] List<CharaData> CharaDatas = new List<CharaData>();
@@ -28,8 +30,11 @@ public class SaveManager : MonoBehaviour
     private void Start()
     {
         audioSource = GameObject.Find("Audio").GetComponent<AudioSource>();
-        Debug.Log(audioSource);
 
+        option = GameObject.Find("Option");
+        option.SetActive(false);
+        help = GameObject.Find("Help");
+        help.SetActive(false);
         if (GameManager.sceneName == "Load")
         {
             flags = SaveDataManager.sd.flags;
@@ -40,9 +45,9 @@ public class SaveManager : MonoBehaviour
         {
             flags.Add(false);
             GameManager.sceneName = "";
+            FindObjectOfType<PlayerControl>().SetState(State.Talk);
+            Help();
         }
-        option = GameObject.Find("Option");
-        option.SetActive(false);
 
         string charaName = GameObject.FindGameObjectWithTag("Player").name.Replace("(Adventure)", "");
         gameManager = FindObjectOfType<GameManager>();
@@ -50,7 +55,17 @@ public class SaveManager : MonoBehaviour
     }
     void Update()
     {
-        if (option.activeSelf) 
+        if (help.activeSelf && (option.activeSelf || !option.activeSelf))
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                audioSource.PlayOneShot(openMenu);
+                FindObjectOfType<PlayerControl>().SetState(State.Normal);
+                help.SetActive(false);
+                helpFlag = false;
+            }
+        }
+        else if (option.activeSelf)
         {
             if (delayInput > 0f)
             {
@@ -79,9 +94,9 @@ public class SaveManager : MonoBehaviour
             button[num].GetComponent<Button>().OnSelect(null);
 
 
-            for (int i = 0; i < button.Count;i++)
+            for (int i = 0; i < button.Count; i++)
             {
-                if(i == num)
+                if (i == num)
                 {
                     button[i].GetComponent<Image>().color = Color.cyan;
                 }
@@ -99,7 +114,7 @@ public class SaveManager : MonoBehaviour
             }
 
         }
-        else
+        else if (helpFlag == false)
         {
             if(Input.GetKeyDown(KeyCode.Tab))
             {
@@ -136,6 +151,13 @@ public class SaveManager : MonoBehaviour
         audioSource.PlayOneShot(select);
 
         SceneManager.LoadScene("Title");
+    }
+
+    public void Help()
+    {
+        audioSource.PlayOneShot(select);
+        helpFlag = true;
+        help.SetActive(true);
     }
 
 }
