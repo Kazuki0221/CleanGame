@@ -63,7 +63,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             if (gameManager.mode == GameMode.Adventure)
             {
-                SetState(State.Normal);
                 if(TalkArea != null)TalkArea.SetActive(true);
                 if(loadFlag)
                 {
@@ -212,7 +211,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 {
                     Vector3 gPos = collision.gameObject.transform.position;
                     gPos.y += 1.5f;
-                    if (haveCount > 0 && haveCount < 3)
+                    if (haveCount > 0 && haveCount <= 3)
                     {
                         if (m_release && cSlotGrid.ReleseItem(itemSelect.num) != null)
                         {

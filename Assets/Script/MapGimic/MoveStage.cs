@@ -69,8 +69,8 @@ public class MoveStage : MonoBehaviour
 
     public void ToMove()
     {
-       
-        gameManager.sceneState = GameManager.BeforeSceneState.Adventure;
+
+        gameManager.SetState(GameManager.BeforeSceneState.Adventure);
         GameManager.sceneName = SceneManager.GetActiveScene().name;
         ToStageName = stageName;
         if(SaveManager.flags[m_storyID] == false)

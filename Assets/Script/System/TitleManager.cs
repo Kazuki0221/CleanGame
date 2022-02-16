@@ -190,6 +190,7 @@ public class TitleManager : MonoBehaviour
         if (modeTrigger == 1)
         {
             source.PlayOneShot(sound);
+            FindObjectOfType<GameManager>().SetState(GameManager.BeforeSceneState.StageSelect);
         }
 
         num = 0;

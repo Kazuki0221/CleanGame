@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
     public CItem[] item;
     public int itemCount = 0;
 
+    public static string stageName;
+
     AudioSource source;
 
     /// <summary>
@@ -58,6 +60,7 @@ public class GameController : MonoBehaviour
         timeUpText.SetActive(false);
 
         source = GetComponent<AudioSource>();
+        stageName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
 
     }
 

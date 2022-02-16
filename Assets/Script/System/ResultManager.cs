@@ -132,7 +132,7 @@ public class ResultManager : MonoBehaviour
 
     public void Retry()
     {
-
+        SceneManager.LoadScene(GameController.stageName);
     }
 
     public void ToMap()

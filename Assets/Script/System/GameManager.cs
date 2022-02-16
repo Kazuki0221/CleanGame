@@ -163,4 +163,10 @@ public class GameManager : MonoBehaviour
         clickFlag = false;
     }
 
+    public void SetState(BeforeSceneState state)
+    {
+        this.sceneState = state;
+    }
+
+
 }
